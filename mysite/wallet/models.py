@@ -14,6 +14,9 @@ class TotalIncome(models.Model):
     """This model consists of summery of my incomes"""
     total_income = models.DecimalField(max_digits=20, decimal_places=2, null=True, verbose_name='Total income')
 
+    def __str__(self):
+        return f'Your total income: {self.total_income}'
+
 
 class PurchasedGoods(models.Model):
     """This model describes list of purchased goods"""
@@ -28,3 +31,6 @@ class PurchasedGoods(models.Model):
 class TotalExpenses(models.Model):
     """This model consists of summery of expenses"""
     total_expenses = models.DecimalField(max_digits=20, decimal_places=2, null=True, verbose_name='Total expenses')
+
+    def __str__(self):
+        return f'Your total expenses: {self.total_expenses}'

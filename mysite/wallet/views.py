@@ -15,10 +15,6 @@ def main_page(request):
 def income(request):
     my_income = Income.objects.all()
     return render(request, 'wallet/income.html', {'my_income': my_income, 'title': 'My incomes'})
-    # res = '<h1>My incomes</h1>'
-    # for i in my_income:
-    #     res += f'<div>\n<p>{i.date_of_income}</p>\n<p>You received {i.amount_of_income}</p>\n</div>\n<hr>\n'
-    # return HttpResponse(res)
 
 
 def my_total_income(request):

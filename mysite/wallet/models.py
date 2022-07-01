@@ -34,3 +34,9 @@ class TotalExpenses(models.Model):
 
     def __str__(self):
         return f'Your total expenses: {self.total_expenses}'
+
+
+class WalletBalance(models.Model):
+    """This model has information about wallet balance"""
+    wallet_balance = models.DecimalField(max_digits=20, decimal_places=2, null=True, verbose_name='Amount of expenses')
+    date_of_balance = models.DateField(auto_now_add=True, db_index=True, verbose_name='Date')

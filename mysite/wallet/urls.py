@@ -6,5 +6,6 @@ urlpatterns = [
     path('', main_page),
     path('test_page/', test),
     path('income_page', income),
+    path('total_income_page', my_total_income),
 
 ]

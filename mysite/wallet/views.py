@@ -8,7 +8,7 @@ from .models import Income
 
 
 def main_page(request):
-    return HttpResponse("It will be home page")
+    return render(request, 'wallet/main_page.html', {'title': 'Home page'})
 
 
 def income(request):

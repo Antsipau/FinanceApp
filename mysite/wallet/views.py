@@ -3,7 +3,6 @@ from datetime import date
 from django.db.models import Sum
 from django.shortcuts import render
 from django.http import HttpResponse
-from decimal import Decimal
 
 from .models import Income
 
@@ -19,7 +18,11 @@ def income(request):
 
 def my_total_income(request):
     total = Income.objects.aggregate(TOTAL=Sum('amount_of_income'))['TOTAL']
-    res = '<h1> My total income:</h1>' f'<div>\n<p>Today is {date.today()}</p>\n<p>Your total income:{total}</p>\n</div>'
+    res = '<h1> My total income:</h1>' \
+          f'<div>\n' \
+          f'<p>Today is {date.today()}</p>\n' \
+          f'<p>Your total income:{total:.2f}</p>\n' \
+          f'</div>'
     return HttpResponse(res)
 
 

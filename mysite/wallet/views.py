@@ -4,7 +4,8 @@ from django.db.models import Sum
 from django.shortcuts import render
 from django.http import HttpResponse
 
-from .models import Income
+from .models import Income, PurchasedGoods
+
 
 
 def main_page(request):
@@ -27,7 +28,8 @@ def my_total_income(request):
 
 
 def my_purchased_goods(request):
-    return HttpResponse("<h1>Purchased goods</h1>")
+    my_goods = PurchasedGoods.objects.all()
+    return render(request, 'wallet/purchased_goods_page.html', {'my_goods': my_goods, 'title': 'Purchased goods'})
 
 
 def test(request):

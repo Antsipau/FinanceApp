@@ -9,7 +9,7 @@ class Income(models.Model):
     class Meta:
         verbose_name = 'Income'
         verbose_name_plural = 'Incomes'
-        ordering = ['date_of_income']
+        ordering = ['-date_of_income']
 
 
 class PurchasedGoods(models.Model):

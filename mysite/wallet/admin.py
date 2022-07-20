@@ -11,8 +11,7 @@ class IncomeAdmin(admin.ModelAdmin):
 
 
 class PurchasedGoodsAdmin(admin.ModelAdmin):
-    list_display = ('id', 'date_of_purchase', 'name_of_product', 'price_per_item', 'quantity_of_goods',
-                    'amount_of_expenses')
+    list_display = ('id', 'date_of_purchase', 'name_of_product', 'price_per_item', 'quantity_of_goods')
     list_display_links = ('id', 'date_of_purchase')
     search_fields = ('date_of_purchase', 'name_of_product', 'quantity_of_goods')
 

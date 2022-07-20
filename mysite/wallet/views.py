@@ -7,7 +7,6 @@ from django.http import HttpResponse
 from .models import Income, PurchasedGoods
 
 
-
 def main_page(request):
     return render(request, 'wallet/main_page.html', {'title': 'Home page'})
 

@@ -4,8 +4,12 @@ from django.db import models
 class Income(models.Model):
     """This model describes incomes"""
     date_of_income = models.DateField(auto_now_add=True, db_index=True, verbose_name='Date')
+    type_of_income = models.CharField(max_length=255, null=True, blank=True, verbose_name='Type of income')
     amount_of_income = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True,
                                            verbose_name='Amount of income')
+
+    def __str__(self):
+        return self.type_of_income
 
     class Meta:
         verbose_name = 'Income'
@@ -20,6 +24,9 @@ class PurchasedGoods(models.Model):
     price_per_item = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True,
                                          verbose_name='Price per item')
     quantity_of_goods = models.IntegerField(null=True, blank=True, verbose_name='Quantity of goods')
+
+    def __str__(self):
+        return self.name_of_product
 
     class Meta:
         verbose_name = 'Purchased good'

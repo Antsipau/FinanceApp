@@ -5,7 +5,7 @@ from .models import PurchasedGoods
 
 
 class IncomeAdmin(admin.ModelAdmin):
-    list_display = ('id', 'date_of_income', 'amount_of_income')
+    list_display = ('id', 'date_of_income', 'amount_of_income', 'type_of_income')
     list_display_links = ('id', 'date_of_income')
     search_fields = ('date_of_income',)
 

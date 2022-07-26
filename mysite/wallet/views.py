@@ -8,7 +8,8 @@ from .models import Income, PurchasedGoods
 
 
 def main_page(request):
-    return render(request, 'wallet/main_page.html', {'title': 'Home page'})
+    my_income = Income.objects.all()
+    return render(request, 'wallet/main_page.html', {'my_income': my_income, 'title': 'Home page'})
 
 
 def income(request):

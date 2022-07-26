@@ -5,13 +5,12 @@
     <title>{{ title }}</title>
 </head>
 <body>
-<h1>{{ title }}</h1>
+<h1 align="center">{{ title }}</h1>
 
 {% for item in  my_income %}
     <div>
-        <p>{{item.date_of_income}} you received: </p>
-        <p>{{item.amount_of_income}}</p>
-        <p>{{item.type_of_income}}</p>
+        <p align="center">{{item.date_of_income}} you received {{item.type_of_income}}.</p>
+        <p align="center"> Amount of income is {{item.amount_of_income}}</p>
     </div>
 <hr>
 {% endfor %}

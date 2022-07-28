@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ title }}</title>
-</head>
-<body>
-<h1>{{ title }}</h1>
+{% extends 'base.html' %}
+
+{% block content%}
 
 {% for item in  my_goods %}
     <div>
@@ -17,5 +12,4 @@
 <hr>
 {% endfor %}
 
-</body>
-</html>
+{% endblock %}

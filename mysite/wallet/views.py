@@ -1,9 +1,10 @@
 from datetime import date
 
 from django.db.models import Sum
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
+from .forms import IncomeForm
 from .models import Income, PurchasedGoods
 
 
@@ -32,5 +33,13 @@ def my_purchased_goods(request):
     return render(request, 'wallet/purchased_goods_page.html', {'my_goods': my_goods, 'title': 'Purchased goods'})
 
 
-def test(request):
-    return HttpResponse("<h1>Test page</h1>")
+def add_income(request):
+    """Function to add information into Income Model (database)"""
+    if request.method == 'POST':
+        form = IncomeForm(request.POST)
+        if form.is_valid():
+            Income.objects.create(**form.cleaned_data)
+            return redirect('home')
+    else:
+        form = IncomeForm()
+    return render(request, 'wallet/add_income_page.html', {'form': form})

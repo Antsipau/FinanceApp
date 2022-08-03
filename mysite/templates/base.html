@@ -13,40 +13,95 @@
 
 {% include 'inc/_header.html' %}
 
-{% include 'inc/_nav.html' %}
-
-<div class="container">
-    <div class="row">
-        <div class="col-2" style="padding: 0px">
-            <div class="card card-body bg-light" align="center">
-                <h3>The current date is:</h3>
-                <h3>{% now "d.m.Y" %}</h3>
+<section class="functionality">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="text-center text-uppercase color1 mb-5">functionality of e-wallet</h2>
             </div>
         </div>
-        <div class="col-8" style="padding: 0px">
-            <div class="card card-body bg-light" align="center">
-                <div class="btn-group" role="group" aria-label="Basic example">
-                    <input class="btn btn-primary btn-lg" type="button" value="Register now">
-                    <input class="btn btn-primary btn-lg" type="button" value="Sign in">
-                    <input class="btn btn-primary btn-lg" type="button" value="Log out">
+        <div class="row">
+             <div class="col-xl-4 col-md-6 col-sm-12">
+                <div align="center">
+                    <a class="btn btn-primary btn-lg " role="button" href="{% url 'home' %}">Home page</a>
                 </div>
-                <div class="btn-group" role="group" aria-label="Basic example">
-                    <input class="btn btn-primary btn-lg" type="button" value="Add purchase">
-                    <input class="btn btn-primary btn-lg" type="button" value="Delete purchase">
-                    <input class="btn btn-primary btn-lg" type="button" value="Show expenses">
-                </div>
-                 {% block content %}CONTENT{% endblock %}
+                <h5 class="text-center">Home Page</h5>
+                <div class="line"></div>
             </div>
-        </div>
-        <div class="col-2" style="padding: 0px">
-            <div class="card card-body bg-light" align="center">
-                <a class="btn btn-primary btn-lg" href="{% url 'add_income' %}" role="button">Add income</a>
-                <a class="btn btn-primary btn-lg" href="{% url 'my_income' %}" role="button">Show incomes</a>
-                Your current balance is:
+            <div class="col-xl-4 col-md-6 col-sm-12">
+                <div align="center">
+                    <a class="btn btn-primary btn-lg " role="button">Register now</a>
+                </div>
+                <h5 class="text-center">Register now</h5>
+                <div class="line"></div>
+            </div>
+            <div class="col-xl-4 col-md-6 col-sm-12">
+                <div align="center">
+                    <a class="btn btn-primary btn-lg" role="button">Sign in</a>
+                </div>
+                <h5 class="text-center">Sign in</h5>
+                <div class="line"></div>
+            </div>
+                <div class="col-xl-4 col-md-6 col-sm-12">
+                    <div align="center">
+                <a class="btn btn-primary btn-lg" role="button">Log out</a>
+                    </div>
+                <h5 class="text-center">Log out</h5>
+                <div class="line"></div>
+            </div>
+            <div class="col-xl-4 col-md-6 col-sm-12">
+                <div align="center">
+                    <a class="btn btn-primary btn-lg" role="button" href="{% url 'add_income' %}" >Add income</a>
+                </div>
+                <h5 class="text-center">Add income</h5>
+                <div class="line"></div>
+            </div>
+            <div class="col-xl-4 col-md-6 col-sm-12">
+                <div align="center">
+                    <a class="btn btn-primary btn-lg" role="button" href="{% url 'my_income' %}">Show incomes</a>
+                </div>
+                <h5 class="text-center">Show incomes</h5>
+                <div class="line"></div>
+            </div>
+            <div class="col-xl-4 col-md-6 col-sm-12">
+                <div align="center">
+                    <a class="btn btn-primary btn-lg " role="button" href="{% url 'total_income_page' %}">Total income</a>
+                </div>
+                <h5 class="text-center">Total income</h5>
+                <div class="line"></div>
+            </div>
+            <div class="col-xl-4 col-md-6 col-sm-12">
+                <div align="center">
+                    <a class="btn btn-primary btn-lg" role="button">Add purchase</a>
+                </div>
+                <h5 class="text-center">Add purchase</h5>
+                <div class="line"></div>
+            </div>
+            <div class="col-xl-4 col-md-6 col-sm-12">
+                <div align="center">
+                    <a class="btn btn-primary btn-lg" role="button">Delete purchase</a>
+                </div>
+                <h5 class="text-center">Delete purchase</h5>
+                <div class="line"></div>
+            </div>
+            <div class="col-xl-4 col-md-6 col-sm-12">
+                <div align="center">
+                    <a class="btn btn-primary btn-lg" role="button">Show expenses</a>
+                </div>
+                <h5 class="text-center">Show expenses</h5>
+                <div class="line"></div>
             </div>
         </div>
     </div>
-</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                {% block content %}CONTENT{% endblock %}
+            </div>
+        </div>
+    </div>
+</section>
+
 
 {% include 'inc/_footer.html' %}
 

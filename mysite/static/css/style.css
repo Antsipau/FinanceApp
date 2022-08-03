@@ -10,11 +10,28 @@ header {
     padding: 50px 0;
 }
 
-header, footer{
+header, footer, section{
     background: var(--color1);
     background: -moz-linear-gradient(left,  var(--color1) 0%, var(--color2) 100%);
     background: -webkit-linear-gradient(left,  var(--color1) 0%,var(--color2) 100%);
     background: linear-gradient(to right,  var(--color1) 0%,var(--color2) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=var(--color1), endColorstr=var(--color2),GradientType=1 );
 
+}
+
+/*color of the section text */
+.color1 {
+    color: var(--color1)
+}
+
+.color2 {
+    color: var(--color2)
+}
+
+.bg1 {
+    background-color: var(--color1)
+}
+
+.bg2 {
+    background-color: var(--color2)
 }

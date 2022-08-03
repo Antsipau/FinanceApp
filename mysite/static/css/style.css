@@ -1,3 +1,20 @@
-body{
-    background-color: #FFFF00;
+:root{
+    --color1: #7FFFD4;
+    --color2: #000000;
+}
+header, footer, section {
+    padding: 25px 0;
+}
+
+header {
+    padding: 50px 0;
+}
+
+header, footer{
+    background: var(--color1);
+    background: -moz-linear-gradient(left,  var(--color1) 0%, var(--color2) 100%);
+    background: -webkit-linear-gradient(left,  var(--color1) 0%,var(--color2) 100%);
+    background: linear-gradient(to right,  var(--color1) 0%,var(--color2) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=var(--color1), endColorstr=var(--color2),GradientType=1 );
+
 }

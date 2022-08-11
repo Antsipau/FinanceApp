@@ -26,10 +26,10 @@ header, footer, section{
 /*functionality */
 
 .app_circle {
-    margin; 0 auto 15px;
+    margin: 0 auto 5px;
     width: 70px;
     height: 70px;
-    border: 3px solid #FF4500;
+    border: 5px solid #FF4500;
     border-radius: 50%;
     display: flex;
     justify-content: center;

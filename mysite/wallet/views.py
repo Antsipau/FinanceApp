@@ -4,7 +4,7 @@ from django.db.models import Sum
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
-from .forms import IncomeForm
+from .forms import IncomeForm, PurchaseForm
 from .models import Income, PurchasedGoods
 
 
@@ -15,7 +15,7 @@ def main_page(request):
 
 def income(request):
     my_income = Income.objects.all()
-    return render(request, 'wallet/income.html', {'my_income': my_income, 'title': 'My incomes'})
+    return render(request, 'wallet/income_page.html', {'my_income': my_income, 'title': 'My incomes'})
 
 
 def my_total_income(request):
@@ -42,4 +42,16 @@ def add_income(request):
             return redirect('home')
     else:
         form = IncomeForm()
-    return render(request, 'wallet/add_income_page.html', {'form': form})
+    return render(request, 'wallet/add_income_page.html', {'form': form, 'title': 'Add income'})
+
+
+def add_purchase(request):
+    """Function to add information into PurchasedGoods Model (database)"""
+    if request.method == 'POST':
+        form = PurchaseForm(request.POST)
+        if form.is_valid():
+            PurchasedGoods.objects.create(**form.cleaned_data)
+            return redirect('home')
+    else:
+        form = PurchaseForm()
+    return render(request, 'wallet/add_purchase_page.html', {'form': form, 'title': 'Add purchase'})

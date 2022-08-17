@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+
+{% block content%}
+<div>
+    <h1 align="center" class="text-white">Add purchase</h1>
+</div>
+
+<form action="{% url 'add_purchase' %}" method="post">
+
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <div class="d-grid gap-2">
+        <button type="submit" class="btn btn btn-success">Add purchase</button>
+    </div>
+</form>
+
+{% endblock %}

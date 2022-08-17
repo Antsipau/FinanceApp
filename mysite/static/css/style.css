@@ -1,16 +1,20 @@
 :root{
-    --color1: #7FFFD4;
-    --color2: #000000;
+    --color1: #E6E6FA;
+    --color2: #4B0082;
 }
 header, footer, section {
-    padding: 25px 0;
-}
-
-header {
     padding: 50px 0;
 }
 
-header, footer, section {
+header {
+    padding: 100px 0;
+}
+
+footer {
+    padding: 70px 0;
+}
+
+header, footer, section{
     background: var(--color1);
     background: -moz-linear-gradient(left,  var(--color1) 0%, var(--color2) 100%);
     background: -webkit-linear-gradient(left,  var(--color1) 0%,var(--color2) 100%);
@@ -22,12 +26,12 @@ header, footer, section {
 /*functionality */
 
 .app_circle {
-    margin; 0 auto 15px;
+    margin: 0 auto 5px;
     width: 70px;
     height: 70px;
-    border: 3px solid #FF4500;
     border-radius: 50%;
     display: flex;
+    background-color: #191970;
     justify-content: center;
     align-items: center;
 }
@@ -55,4 +59,41 @@ header, footer, section {
 
 .bg2 {
     background-color: var(--color2)
+}
+
+/* color of the icons */
+.fa-house {
+    color: #D8BFD8;
+}
+
+.fa-address-card {
+    color: #D8BFD8;
+}
+
+.fa-right-to-bracket {
+    color: #D8BFD8;
+}
+
+.fa-right-from-bracket {
+    color: #D8BFD8;
+}
+
+.fa-hand-holding-dollar {
+    color: #D8BFD8;
+}
+
+.fa-wallet {
+    color: #D8BFD8;
+}
+
+.fa-piggy-bank {
+    color: #D8BFD8;
+}
+
+.fa-basket-shopping{
+    color: #D8BFD8;
+}
+
+.fa-cart-arrow-down{
+    color: #D8BFD8;
 }

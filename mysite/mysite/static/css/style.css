@@ -1,6 +1,6 @@
 :root{
-    --color1: #7FFFD4;
-    --color2: #000000;
+    --color1: #E6E6FA;
+    --color2: #4B0082;
 }
 header, footer, section {
     padding: 50px 0;
@@ -29,9 +29,9 @@ header, footer, section{
     margin: 0 auto 5px;
     width: 70px;
     height: 70px;
-    border: 5px solid #FF4500;
     border-radius: 50%;
     display: flex;
+    background-color: #191970;
     justify-content: center;
     align-items: center;
 }
@@ -59,4 +59,41 @@ header, footer, section{
 
 .bg2 {
     background-color: var(--color2)
+}
+
+/* color of the icons */
+.fa-house {
+    color: #D8BFD8;
+}
+
+.fa-address-card {
+    color: #D8BFD8;
+}
+
+.fa-right-to-bracket {
+    color: #D8BFD8;
+}
+
+.fa-right-from-bracket {
+    color: #D8BFD8;
+}
+
+.fa-hand-holding-dollar {
+    color: #D8BFD8;
+}
+
+.fa-wallet {
+    color: #D8BFD8;
+}
+
+.fa-piggy-bank {
+    color: #D8BFD8;
+}
+
+.fa-basket-shopping{
+    color: #D8BFD8;
+}
+
+.fa-cart-arrow-down{
+    color: #D8BFD8;
 }

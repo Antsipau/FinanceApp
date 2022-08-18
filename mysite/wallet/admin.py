@@ -1,7 +1,6 @@
 from django.contrib import admin
 
-from .models import Income
-from .models import PurchasedGoods
+from .models import Income, PurchasedGoods, Category
 
 
 class IncomeAdmin(admin.ModelAdmin):
@@ -13,12 +12,21 @@ class IncomeAdmin(admin.ModelAdmin):
 
 
 class PurchasedGoodsAdmin(admin.ModelAdmin):
-    list_display = ('id', 'date_of_purchase', 'name_of_product', 'price_per_item', 'quantity_of_goods')
+    list_display = ('id', 'date_of_purchase', 'name_of_product', 'price_per_item', 'quantity_of_goods',
+                    'category')
     list_display_links = ('id', 'date_of_purchase')
-    search_fields = ('date_of_purchase', 'name_of_product', 'quantity_of_goods')
-    list_filter = ('name_of_product', 'quantity_of_goods', 'price_per_item')
+    search_fields = ('date_of_purchase', 'name_of_product', 'quantity_of_goods', 'category')
+    list_filter = ('name_of_product', 'quantity_of_goods', 'price_per_item', 'category')
     list_editable = ('name_of_product', 'quantity_of_goods', 'price_per_item')
+
+
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title')
+    list_display_links = ('id', 'title')
+    search_fields = ('title',)
+    list_filter = ('title',)
 
 
 admin.site.register(Income, IncomeAdmin)
 admin.site.register(PurchasedGoods, PurchasedGoodsAdmin)
+admin.site.register(Category, CategoryAdmin)

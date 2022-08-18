@@ -19,11 +19,13 @@ class Income(models.Model):
 
 class PurchasedGoods(models.Model):
     """This model describes list of purchased goods"""
+    title = models.CharField(max_length=255, verbose_name='Name', null=True, blank=True)
     date_of_purchase = models.DateField(auto_now_add=True, db_index=True, verbose_name='Date')
     name_of_product = models.CharField(max_length=255, null=True, blank=True, verbose_name='Name of product')
     price_per_item = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True,
                                          verbose_name='Price per item')
     quantity_of_goods = models.IntegerField(null=True, blank=True, verbose_name='Quantity of goods')
+    category = models.ForeignKey('Category', on_delete=models.PROTECT, null=True)
 
     def __str__(self):
         return self.name_of_product
@@ -32,3 +34,13 @@ class PurchasedGoods(models.Model):
         verbose_name = 'Purchased good'
         verbose_name_plural = 'Purchased goods'
         ordering = ['-date_of_purchase']
+
+
+class Category(models.Model):
+    """This model contains categories of expenses"""
+    title = models.CharField(max_length=255, db_index=True, verbose_name='Name of category')
+
+    class Meta:
+        verbose_name = 'Category'
+        verbose_name_plural = 'Categories'
+        ordering = ['title']

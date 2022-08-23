@@ -9,11 +9,12 @@ from .models import Income, PurchasedGoods
 
 
 def main_page(request):
-    my_income = Income.objects.all()
-    return render(request, 'wallet/main_page.html', {'my_income': my_income, 'title': 'Home page'})
+    """Function to display home page"""
+    return render(request, 'wallet/main_page.html', {'title': 'Home page'})
 
 
 def income(request):
+    """function to display income page"""
     my_income = Income.objects.all()
     return render(request, 'wallet/income_page.html', {'my_income': my_income, 'title': 'My incomes'})
 

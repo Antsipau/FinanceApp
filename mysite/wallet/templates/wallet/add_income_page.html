@@ -1,19 +1,24 @@
 {% extends 'base.html' %}
 
 {% block content%}
+
 <div>
-    <h1 align="center" class="text-white">Add income </h1>
+    <h1 align="center" class="text-white">Please add your income below</h1>
 </div>
-
-<form action="{% url 'add_income' %}" method="post">
-
-    {% csrf_token %}
-
-    {{ form.as_p }}
-
-    <div class="d-grid gap-2">
-        <button type="submit" class="btn btn btn-success">Add income</button>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-4">
+            <div align="center">
+                <form action="{% url 'add_income' %}" method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn btn-success">Add income</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-</form>
+</div>
 
 {% endblock %}

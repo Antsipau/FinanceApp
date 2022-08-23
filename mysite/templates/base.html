@@ -27,7 +27,7 @@
         <div class="row">
              <div class="col-xl-3 col-md-6 col-sm-12">
                 <div align="center">
-                    <a class="app_circle" role="button" href="{% url 'home' %}">
+                    <a class="app_circle" role="button" id="home_page_button" href="{% url 'home' %}">
                         <i class="fa-solid fa-2xl fa-house fa-beat-fade"></i>
                     </a>
                 </div>
@@ -36,7 +36,7 @@
             </div>
             <div class="col-xl-3 col-md-6 col-sm-12">
                 <div align="center">
-                    <a class="app_circle" role="button">
+                    <a class="app_circle" role="button" id="register_button">
                         <i class="fa-solid fa-2xl fa-address-card fa-shake"></i>
                     </a>
                 </div>
@@ -45,7 +45,7 @@
             </div>
             <div class="col-xl-3 col-md-6 col-sm-12">
                 <div align="center">
-                    <a class="app_circle" role="button">
+                    <a class="app_circle" role="button" id="sign_in_button">
                         <i class="fa-solid fa-2xl fa-right-to-bracket fa-beat-fade"></i>
                     </a>
                 </div>
@@ -54,7 +54,7 @@
             </div>
                 <div class="col-xl-3 col-md-6 col-sm-12">
                     <div align="center">
-                <a class="app_circle" role="button">
+                <a class="app_circle" role="button" id="log_out_button">
                     <i class="fa-solid fa-2xl fa-right-from-bracket fa-beat-fade"></i>
                 </a>
                     </div>
@@ -65,7 +65,7 @@
             <div class="row">
             <div class="col-xl-3 col-md-6 col-sm-12">
                 <div align="center">
-                    <a class="app_circle" role="button" href="{% url 'add_income' %}">
+                    <a class="app_circle" role="button" id="add_income_button" href="{% url 'add_income' %}">
                         <i class="fa-solid fa-2xl fa-hand-holding-dollar fa-flip"></i>
                     </a>
                 </div>
@@ -74,7 +74,7 @@
             </div>
             <div class="col-xl-3 col-md-6 col-sm-12">
                 <div align="center">
-                    <a class="app_circle" role="button" href="{% url 'my_income' %}">
+                    <a class="app_circle" role="button" id="show_incomes_button" href="{% url 'my_income' %}">
                         <i class="fa-solid fa-2xl fa-wallet fa-flip"></i>
                     </a>
                 </div>
@@ -83,7 +83,7 @@
             </div>
             <div class="col-xl-3 col-md-6 col-sm-12">
                 <div align="center">
-                    <a class="app_circle" role="button" href="{% url 'total_income_page' %}">
+                    <a class="app_circle" role="button" id="total_income_button" href="{% url 'total_income_page' %}">
                         <i class="fa-solid fa-2xl fa-piggy-bank fa-shake"></i>
                     </a>
                 </div>
@@ -92,7 +92,7 @@
             </div>
             <div class="col-xl-3 col-md-6 col-sm-12">
                 <div align="center">
-                    <a class="app_circle" role="button" href="{% url 'add_purchase' %}">
+                    <a class="app_circle" role="button" id="add_purchase_button" href="{% url 'add_purchase' %}">
                         <i class="fa-solid fa-2xl fa-basket-shopping fa-beat"></i>
                     </a>
                 </div>
@@ -103,7 +103,7 @@
         <div class="row justify-content-center">
             <div class="col-xl-3 col-md-6 col-sm-12">
                 <div align="center">
-                    <a class="app_circle" role="button">
+                    <a class="app_circle" role="button" id="show_expenses_button">
                         <i class="fa-solid fa-2xl fa-cart-arrow-down fa-flip"></i>
                     </a>
                 </div>
@@ -113,15 +113,9 @@
         </div>
     </div>
 </div>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-4">
-                <div align="center">
-                    {% block content %}CONTENT{% endblock %}
-                </div>
-            </div>
-        </div>
-    </div>
+
+    {% block content %}CONTENT{% endblock %}
+
 </section>
 
 

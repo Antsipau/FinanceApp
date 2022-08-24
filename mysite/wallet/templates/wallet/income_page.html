@@ -3,11 +3,30 @@
 {% block content%}
 
 {% for item in  my_income %}
-    <div>
-        <p align="center" class="text-white">{{item.date_of_income}} you received {{item.type_of_income}}.</p>
-        <p align="center" class="text-white"> Amount of income is {{item.amount_of_income}}</p>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-8">
+            <div align="center">
+                <table class="table table-bordered table-hover border-warning border border-5">
+                    <thead>
+                    <tr>
+                        <th scope="col" class="text-center text-white">Date of income</th>
+                        <th scope="col" class="text-center text-white">Type of income</th>
+                        <th scope="col" class="text-center text-white">Amount of income</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="text-center text-white">{{item.date_of_income|date:"d-m-Y"}}</td>
+                        <td class="text-center text-white">{{item.type_of_income}}</td>
+                        <td class="text-center text-white">{{item.amount_of_income}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-<hr>
+</div>
 {% endfor %}
 
 {% endblock %}

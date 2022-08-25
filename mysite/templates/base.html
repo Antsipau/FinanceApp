@@ -52,17 +52,17 @@
                 <h5 class="text-center text-white">Sign in</h5>
                 <div class="line"></div>
             </div>
-                <div class="col-xl-3 col-md-6 col-sm-12">
-                    <div align="center">
-                <a class="app_circle" role="button" id="log_out_button">
-                    <i class="fa-solid fa-2xl fa-right-from-bracket fa-beat-fade"></i>
-                </a>
-                    </div>
+            <div class="col-xl-3 col-md-6 col-sm-12">
+                <div align="center">
+                    <a class="app_circle" role="button" id="log_out_button">
+                        <i class="fa-solid fa-2xl fa-right-from-bracket fa-beat-fade"></i>
+                    </a>
+                </div>
                 <h5 class="text-center text-white">Log out</h5>
                 <div class="line"></div>
             </div>
-            </div>
-            <div class="row">
+        </div>
+        <div class="row">
             <div class="col-xl-3 col-md-6 col-sm-12">
                 <div align="center">
                     <a class="app_circle" role="button" id="add_income_button" href="{% url 'add_income' %}">
@@ -83,15 +83,6 @@
             </div>
             <div class="col-xl-3 col-md-6 col-sm-12">
                 <div align="center">
-                    <a class="app_circle" role="button" id="total_income_button" href="{% url 'total_income_page' %}">
-                        <i class="fa-solid fa-2xl fa-piggy-bank fa-shake"></i>
-                    </a>
-                </div>
-                <h5 class="text-center text-white">Total income</h5>
-                <div class="line"></div>
-            </div>
-            <div class="col-xl-3 col-md-6 col-sm-12">
-                <div align="center">
                     <a class="app_circle" role="button" id="add_purchase_button" href="{% url 'add_purchase' %}">
                         <i class="fa-solid fa-2xl fa-basket-shopping fa-beat"></i>
                     </a>
@@ -99,8 +90,6 @@
                 <h5 class="text-center text-white">Add purchase</h5>
                 <div class="line"></div>
             </div>
-        </div>
-        <div class="row justify-content-center">
             <div class="col-xl-3 col-md-6 col-sm-12">
                 <div align="center">
                     <a class="app_circle" role="button" id="show_expenses_button">
@@ -112,7 +101,6 @@
             </div>
         </div>
     </div>
-</div>
 
     {% block content %}CONTENT{% endblock %}
 

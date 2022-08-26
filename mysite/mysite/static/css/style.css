@@ -14,7 +14,7 @@ footer {
     padding: 70px 0;
 }
 
-header, footer, section{
+header, footer, section {
     background: var(--color1);
     background: -moz-linear-gradient(left,  var(--color1) 0%, var(--color2) 100%);
     background: -webkit-linear-gradient(left,  var(--color1) 0%,var(--color2) 100%);
@@ -96,4 +96,9 @@ header, footer, section{
 
 .fa-cart-arrow-down{
     color: #D8BFD8;
+}
+
+.list-group-item {
+    background-color: transparent;
+    border-color: #FFFF00;
 }

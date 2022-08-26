@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
 from .forms import IncomeForm, PurchaseForm
-from .models import Income, PurchasedGoods
+from .models import Income, PurchasedGoods, Category
 
 
 def main_page(request):
@@ -30,8 +30,16 @@ def my_total_income(request):
 
 
 def my_purchased_goods(request):
+    """Function to display purchased goods"""
     my_goods = PurchasedGoods.objects.all()
-    return render(request, 'wallet/purchased_goods_page.html', {'my_goods': my_goods, 'title': 'Purchased goods'})
+    categories = Category.objects.all()
+    context = {
+        'my_goods': my_goods,
+        'title': 'Purchased goods',
+        'categories': categories
+    }
+
+    return render(request, 'wallet/purchased_goods_page.html', context=context)
 
 
 def add_income(request):
@@ -56,3 +64,14 @@ def add_purchase(request):
     else:
         form = PurchaseForm()
     return render(request, 'wallet/add_purchase_page.html', {'form': form, 'title': 'Add purchase'})
+
+
+def get_category(request, category_id):
+    """Function to get category of purchased goods"""
+    goods = PurchasedGoods.objects.filter(category_id=category_id)
+    categories = Category.objects.all()
+    category = Category.objects.get(pk=category_id)
+    return render(request, 'wallet/category.html', {'goods': goods, 'categories': categories, 'category': category,
+                                                    'title': 'Purchased goods'})
+
+

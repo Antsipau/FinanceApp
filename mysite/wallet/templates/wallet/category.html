@@ -18,7 +18,7 @@
     </div>
 </div>
 
-{% for item in  my_goods %}
+{% for item in  goods %}
    <div class="container mt-2">
     <div class="row justify-content-center">
         <div class="col-8">
@@ -39,9 +39,7 @@
                         <td class="text-center text-white">{{item.name_of_product}}</td>
                         <td class="text-center text-white">{{item.price_per_item}}</td>
                         <td class="text-center text-white">{{item.quantity_of_goods}}</td>
-                        <td class="text-center text-white">
-                            <a href="{% url 'category' item.category.pk %}" style="color: white"> {{item.category}}</a>
-                        </td>
+                        <td class="text-center text-white">{{item.category}}</td>
                     </tr>
                     </tbody>
                 </table>

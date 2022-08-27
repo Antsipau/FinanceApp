@@ -18,7 +18,6 @@
     </div>
 </div>
 
-{% for item in  my_goods %}
    <div class="container mt-2">
     <div class="row justify-content-center">
         <div class="col-8">
@@ -34,6 +33,7 @@
                     </tr>
                     </thead>
                     <tbody>
+                    {% for item in  my_goods %}
                     <tr>
                         <td class="text-center text-white">{{item.date_of_purchase|date:"d-m-Y"}}</td>
                         <td class="text-center text-white">{{item.name_of_product}}</td>
@@ -43,12 +43,13 @@
                             <a href="{% url 'category' item.category.pk %}" style="color: white"> {{item.category}}</a>
                         </td>
                     </tr>
+                    {% endfor %}
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
-{% endfor %}
+
 
 {% endblock %}

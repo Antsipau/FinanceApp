@@ -2,7 +2,6 @@
 
 {% block content%}
 
-{% for item in  my_income %}
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-8">
@@ -16,17 +15,18 @@
                     </tr>
                     </thead>
                     <tbody>
+                    {% for item in  my_income %}
                     <tr>
                         <td class="text-center text-white">{{item.date_of_income|date:"d-m-Y"}}</td>
                         <td class="text-center text-white">{{item.type_of_income}}</td>
                         <td class="text-center text-white">{{item.amount_of_income}}</td>
                     </tr>
+                    {% endfor %}
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
-{% endfor %}
 
 {% endblock %}

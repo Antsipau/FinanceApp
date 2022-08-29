@@ -18,7 +18,7 @@
     </div>
 </div>
 
-{% for item in  goods %}
+
    <div class="container mt-2">
     <div class="row justify-content-center">
         <div class="col-8">
@@ -34,6 +34,7 @@
                     </tr>
                     </thead>
                     <tbody>
+                    {% for item in  goods %}
                     <tr>
                         <td class="text-center text-white">{{item.date_of_purchase|date:"d-m-Y"}}</td>
                         <td class="text-center text-white">{{item.name_of_product}}</td>
@@ -41,12 +42,12 @@
                         <td class="text-center text-white">{{item.quantity_of_goods}}</td>
                         <td class="text-center text-white">{{item.category}}</td>
                     </tr>
+                    {% endfor %}
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
-{% endfor %}
 
 {% endblock %}

@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Sum
 
 
 class Income(models.Model):
@@ -7,6 +8,13 @@ class Income(models.Model):
     type_of_income = models.CharField(max_length=255, null=True, blank=True, verbose_name='Type of income')
     amount_of_income = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True,
                                            verbose_name='Amount of income')
+
+    @staticmethod
+    def my_total_income():
+        """This function sums the values оf column 'amount_of_income' """
+        total = Income.objects.aggregate(TOTAL=Sum('amount_of_income'))['TOTAL']
+        result = f'Your total income is: {total:.2f}'
+        return result
 
     def __str__(self):
         return self.type_of_income

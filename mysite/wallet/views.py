@@ -1,8 +1,6 @@
-from datetime import date
-
-from django.db.models import Sum
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.db.models import Sum
 
 from .forms import IncomeForm, PurchaseForm
 from .models import Income, PurchasedGoods, Category
@@ -16,17 +14,9 @@ def main_page(request):
 def income(request):
     """function to display income page"""
     my_income = Income.objects.all()
-    return render(request, 'wallet/income_page.html', {'my_income': my_income, 'title': 'My incomes'})
-
-
-def my_total_income(request):
-    total = Income.objects.aggregate(TOTAL=Sum('amount_of_income'))['TOTAL']
-    res = '<h1> My total income:</h1>' \
-          f'<div>\n' \
-          f'<p>Today is {date.today()}</p>\n' \
-          f'<p>Your total income:{total:.2f}</p>\n' \
-          f'</div>'
-    return HttpResponse(res)
+    return render(request, 'wallet/income_page.html', {'my_income': my_income,
+                                                       'title': 'My incomes',
+                                                       'total_income': Income.my_total_income()})
 
 
 def my_purchased_goods(request):
@@ -73,5 +63,3 @@ def get_category(request, category_id):
     category = Category.objects.get(pk=category_id)
     return render(request, 'wallet/category.html', {'goods': goods, 'categories': categories, 'category': category,
                                                     'title': 'Purchased goods'})
-
-

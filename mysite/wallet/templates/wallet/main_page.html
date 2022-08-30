@@ -1,5 +1,91 @@
 {% extends 'base.html' %}
 
-{% block content%}
+{% block title %}
+{{title}}
+{% endblock %}
 
+{% block section %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="text-center text-uppercase color1 mb-5">functionality of e-wallet</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-3 col-md-6 col-sm-12">
+            <div align="center">
+                <a class="app_circle" role="button" id="home_page_button" href="{% url 'home' %}">
+                    <i class="fa-solid fa-2xl fa-house fa-beat-fade"></i>
+                </a>
+            </div>
+            <h5 class="text-center text-white">Home Page</h5>
+            <div class="line"></div>
+        </div>
+        <div class="col-xl-3 col-md-6 col-sm-12">
+            <div align="center">
+                <a class="app_circle" role="button" id="register_button">
+                    <i class="fa-solid fa-2xl fa-address-card fa-shake"></i>
+                </a>
+            </div>
+            <h5 class="text-center text-white">Register now</h5>
+            <div class="line"></div>
+        </div>
+        <div class="col-xl-3 col-md-6 col-sm-12">
+            <div align="center">
+                <a class="app_circle" role="button" id="sign_in_button">
+                    <i class="fa-solid fa-2xl fa-right-to-bracket fa-beat-fade"></i>
+                </a>
+            </div>
+            <h5 class="text-center text-white">Sign in</h5>
+            <div class="line"></div>
+        </div>
+        <div class="col-xl-3 col-md-6 col-sm-12">
+            <div align="center">
+                <a class="app_circle" role="button" id="log_out_button">
+                    <i class="fa-solid fa-2xl fa-right-from-bracket fa-beat-fade"></i>
+                </a>
+            </div>
+            <h5 class="text-center text-white">Log out</h5>
+            <div class="line"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-3 col-md-6 col-sm-12">
+            <div align="center">
+                <a class="app_circle" role="button" id="add_income_button" href="{% url 'add_income' %}">
+                    <i class="fa-solid fa-2xl fa-hand-holding-dollar fa-flip"></i>
+                </a>
+            </div>
+            <h5 class="text-center text-white">Add income</h5>
+            <div class="line"></div>
+        </div>
+        <div class="col-xl-3 col-md-6 col-sm-12">
+            <div align="center">
+                <a class="app_circle" role="button" id="show_incomes_button" href="{% url 'my_income' %}">
+                    <i class="fa-solid fa-2xl fa-wallet fa-flip"></i>
+                </a>
+            </div>
+            <h5 class="text-center text-white">Show incomes</h5>
+            <div class="line"></div>
+        </div>
+        <div class="col-xl-3 col-md-6 col-sm-12">
+            <div align="center">
+                <a class="app_circle" role="button" id="add_purchase_button" href="{% url 'add_purchase' %}">
+                    <i class="fa-solid fa-2xl fa-basket-shopping fa-beat"></i>
+                </a>
+            </div>
+            <h5 class="text-center text-white">Add purchase</h5>
+            <div class="line"></div>
+        </div>
+        <div class="col-xl-3 col-md-6 col-sm-12">
+            <div align="center">
+                <a class="app_circle" role="button" id="show_expenses_button" href="{% url 'my_purchased_goods' %}">
+                    <i class="fa-solid fa-2xl fa-cart-arrow-down fa-flip"></i>
+                </a>
+            </div>
+            <h5 class="text-center text-white">Show expenses</h5>
+            <div class="line"></div>
+        </div>
+    </div>
+</div>
 {% endblock %}

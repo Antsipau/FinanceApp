@@ -1,23 +1,18 @@
-{% extends 'base.html' %}
+{% extends "wallet/purchased_goods_page.html" %}
+
+{% block title %}
+{{title}}
+{% endblock %}
+
+{% block section %}
+{{ block.super }}
+{% endblock %}
 
 {% block content%}
-<div class="container mt-2">
-    <div class="row justify-content-center">
-        <div class="col-12">
-            <div align="center">
-                <div class="list-group text-center list-group-horizontal-md" >
-                    {% for item in categories %}
-                    <a href="{% url 'category' item.pk %}"
-                       class="list-group-item list-group-item-action list-group-item-info text-white">
-                        {{ item.title }}
-                    </a>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
+{% block categories %}
+{{ block.super }}
+{% endblock %}
 
    <div class="container mt-2">
     <div class="row justify-content-center">

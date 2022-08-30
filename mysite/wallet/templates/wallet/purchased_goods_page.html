@@ -1,6 +1,15 @@
-{% extends 'base.html' %}
+{% extends "wallet/main_page.html" %}
+
+{% block title %}
+{{title}}
+{% endblock %}
+
+{% block section %}
+{{ block.super }}
+{% endblock %}
 
 {% block content%}
+{% block categories %}
 <div class="container mt-2">
     <div class="row justify-content-center">
         <div class="col-12">
@@ -17,8 +26,9 @@
         </div>
     </div>
 </div>
+{% endblock %}
 
-   <div class="container mt-2">
+<div class="container mt-2">
     <div class="row justify-content-center">
         <div class="col-8">
             <div align="center">

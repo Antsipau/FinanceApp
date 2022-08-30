@@ -1,4 +1,12 @@
-{% extends 'base.html' %}
+{% extends "wallet/main_page.html" %}
+
+{% block title %}
+{{title}}
+{% endblock %}
+
+{% block section %}
+{{ block.super }}
+{% endblock %}
 
 {% block content%}
 

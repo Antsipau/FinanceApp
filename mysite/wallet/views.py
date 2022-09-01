@@ -1,18 +1,16 @@
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
-from django.db.models import Sum
+from django.shortcuts import render, redirect, get_object_or_404
 
 from .forms import IncomeForm, PurchaseForm
 from .models import Income, PurchasedGoods, Category
 
 
 def main_page(request):
-    """Function to display home page"""
+    """Display home page"""
     return render(request, 'wallet/main_page.html', {'title': 'Home page'})
 
 
 def income(request):
-    """function to display income page"""
+    """Display income page"""
     my_income = Income.objects.all()
     return render(request, 'wallet/income_page.html', {'my_income': my_income,
                                                        'title': 'My incomes',
@@ -20,20 +18,18 @@ def income(request):
 
 
 def my_purchased_goods(request):
-    """Function to display purchased goods"""
+    """Display purchased goods"""
     my_goods = PurchasedGoods.objects.all()
-    categories = Category.objects.all()
     context = {
         'my_goods': my_goods,
         'title': 'Purchased goods',
-        'categories': categories
     }
 
     return render(request, 'wallet/purchased_goods_page.html', context=context)
 
 
 def add_income(request):
-    """Function to add information into Income Model (database)"""
+    """Add information into Income Model"""
     if request.method == 'POST':
         form = IncomeForm(request.POST)
         if form.is_valid():
@@ -45,7 +41,7 @@ def add_income(request):
 
 
 def add_purchase(request):
-    """Function to add information into PurchasedGoods Model (database)"""
+    """Add information into PurchasedGoods Model"""
     if request.method == 'POST':
         form = PurchaseForm(request.POST)
         if form.is_valid():
@@ -56,10 +52,19 @@ def add_purchase(request):
     return render(request, 'wallet/add_purchase_page.html', {'form': form, 'title': 'Add purchase'})
 
 
+# def get_category(request, category_id):
+#     """Get category of purchased goods"""
+#     goods = PurchasedGoods.objects.filter(category_id=category_id)
+#     category = Category.objects.get(pk=category_id)
+#     return render(request, 'wallet/category.html', {'goods': goods, 'category': category,
+#                                                     'title': 'Purchased goods'})
+
 def get_category(request, category_id):
-    """Function to get category of purchased goods"""
+    """Get category of purchased goods"""
     goods = PurchasedGoods.objects.filter(category_id=category_id)
-    categories = Category.objects.all()
-    category = Category.objects.get(pk=category_id)
-    return render(request, 'wallet/category.html', {'goods': goods, 'categories': categories, 'category': category,
+    category = get_object_or_404(Category, pk=category_id)
+
+    Category.objects.get(pk=category_id)
+    return render(request, 'wallet/category.html', {'goods': goods,
+                                                    'category_item': category,
                                                     'title': 'Purchased goods'})

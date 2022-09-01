@@ -10,7 +10,7 @@ class IncomeForm(forms.Form):
 
 
 class PurchaseForm(forms.Form):
-    """Form """
+    """Form that consists of 3 fields; Name of product, Price per item, Quantity of goods"""
     name_of_product = forms.CharField(max_length=255, required=True,
                                       widget=forms.TextInput(attrs={"class": "form-control"}))
     price_per_item = forms.DecimalField(max_digits=10, decimal_places=2, min_value=0.1,

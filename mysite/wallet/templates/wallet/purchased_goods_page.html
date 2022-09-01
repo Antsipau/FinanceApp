@@ -10,22 +10,7 @@
 
 {% block content%}
 {% block categories %}
-<div class="container mt-2">
-    <div class="row justify-content-center">
-        <div class="col-12">
-            <div align="center">
-                <div class="list-group text-center list-group-horizontal-md" >
-                    {% for item in categories %}
-                    <a href="{% url 'category' item.pk %}"
-                       class="list-group-item list-group-item-action list-group-item-info text-white">
-                        {{ item.title }}
-                    </a>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+{% include 'inc/_categories.html' %}
 {% endblock %}
 
 <div class="container mt-2">
@@ -43,14 +28,14 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for item in  my_goods %}
+                    {% for item in my_goods %}
                     <tr>
                         <td class="text-center text-white">{{item.date_of_purchase|date:"d-m-Y"}}</td>
                         <td class="text-center text-white">{{item.name_of_product}}</td>
                         <td class="text-center text-white">{{item.price_per_item}}</td>
                         <td class="text-center text-white">{{item.quantity_of_goods}}</td>
                         <td class="text-center text-white">
-                            <a href="{% url 'category' item.category.pk %}" style="color: white"> {{item.category}}</a>
+                            <a href="{{ item.category.get_absolute_url }}" style="color: white"> {{item.category}}</a>
                         </td>
                     </tr>
                     {% endfor %}

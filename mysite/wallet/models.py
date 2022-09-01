@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.db.models import Sum
 
 
@@ -11,7 +12,7 @@ class Income(models.Model):
 
     @staticmethod
     def my_total_income():
-        """This function sums the values оf column 'amount_of_income' """
+        """Sum the values оf column 'amount_of_income' """
         total = Income.objects.aggregate(TOTAL=Sum('amount_of_income'))['TOTAL']
         result = f'Your total income is: {total:.2f}'
         return result
@@ -46,6 +47,10 @@ class PurchasedGoods(models.Model):
 class Category(models.Model):
     """This model contains categories of expenses"""
     title = models.CharField(max_length=255, db_index=True, verbose_name='Name of category')
+
+    def get_absolute_url(self):
+        """Get a certain category"""
+        return reverse('category', kwargs={"category_id": self.pk})
 
     def __str__(self):
         return self.title

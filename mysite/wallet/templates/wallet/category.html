@@ -11,10 +11,11 @@
 {% block content%}
 
 {% block categories %}
-{{ block.super }}
+{% include 'inc/_categories.html' %}
 {% endblock %}
 
-   <div class="container mt-2">
+
+<div class="container mt-2">
     <div class="row justify-content-center">
         <div class="col-8">
             <div align="center">
@@ -29,7 +30,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for item in  goods %}
+                    {% for item in goods %}
                     <tr>
                         <td class="text-center text-white">{{item.date_of_purchase|date:"d-m-Y"}}</td>
                         <td class="text-center text-white">{{item.name_of_product}}</td>

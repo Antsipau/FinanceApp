@@ -1,49 +1,15 @@
 {% extends "wallet/purchased_goods_page.html" %}
 
-{% block title %}
-{{title}}
+{% block goods %}
+{% for item in goods %}
+<tr>
+    <td class="text-center text-white">{{item.date_of_purchase|date:"d-m-Y"}}</td>
+    <td class="text-center text-white">{{item.name_of_product}}</td>
+    <td class="text-center text-white">{{item.price_per_item}}</td>
+    <td class="text-center text-white">{{item.quantity_of_goods}}</td>
+    <td class="text-center text-white">{{item.category}}</td>
+</tr>
+{% endfor %}
 {% endblock %}
 
-{% block section %}
-{{ block.super }}
-{% endblock %}
 
-{% block content%}
-
-{% block categories %}
-{% include 'inc/_categories.html' %}
-{% endblock %}
-
-
-<div class="container mt-2">
-    <div class="row justify-content-center">
-        <div class="col-8">
-            <div align="center">
-                <table class="table table-bordered table-hover border-warning border border-5">
-                    <thead>
-                    <tr>
-                        <th scope="col" class="text-center text-white">Date of purchase</th>
-                        <th scope="col" class="text-center text-white">Name of product</th>
-                        <th scope="col" class="text-center text-white">Price per item</th>
-                        <th scope="col" class="text-center text-white">Quantity of goods</th>
-                        <th scope="col" class="text-center text-white">Category</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for item in goods %}
-                    <tr>
-                        <td class="text-center text-white">{{item.date_of_purchase|date:"d-m-Y"}}</td>
-                        <td class="text-center text-white">{{item.name_of_product}}</td>
-                        <td class="text-center text-white">{{item.price_per_item}}</td>
-                        <td class="text-center text-white">{{item.quantity_of_goods}}</td>
-                        <td class="text-center text-white">{{item.category}}</td>
-                    </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
-
-{% endblock %}

@@ -1,13 +1,5 @@
 {% extends "wallet/main_page.html" %}
 
-{% block title %}
-{{title}}
-{% endblock %}
-
-{% block section %}
-{{ block.super }}
-{% endblock %}
-
 {% block content%}
 {% block categories %}
 {% include 'inc/_categories.html' %}
@@ -28,6 +20,7 @@
                     </tr>
                     </thead>
                     <tbody>
+                    {% block goods%}
                     {% for item in my_goods %}
                     <tr>
                         <td class="text-center text-white">{{item.date_of_purchase|date:"d-m-Y"}}</td>
@@ -39,12 +32,11 @@
                         </td>
                     </tr>
                     {% endfor %}
+                    {% endblock %}
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
-
-
 {% endblock %}

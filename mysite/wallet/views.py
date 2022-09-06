@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect, get_object_or_404
-
 from .forms import IncomeForm, PurchaseForm
 from .models import Income, PurchasedGoods, Category
 
@@ -33,7 +32,7 @@ def add_income(request):
     if request.method == 'POST':
         form = IncomeForm(request.POST)
         if form.is_valid():
-            Income.objects.create(**form.cleaned_data)
+            form.save()
             return redirect('home')
     else:
         form = IncomeForm()
@@ -45,19 +44,12 @@ def add_purchase(request):
     if request.method == 'POST':
         form = PurchaseForm(request.POST)
         if form.is_valid():
-            PurchasedGoods.objects.create(**form.cleaned_data)
+            form.save()
             return redirect('home')
     else:
         form = PurchaseForm()
     return render(request, 'wallet/add_purchase_page.html', {'form': form, 'title': 'Add purchase'})
 
-
-# def get_category(request, category_id):
-#     """Get category of purchased goods"""
-#     goods = PurchasedGoods.objects.filter(category_id=category_id)
-#     category = Category.objects.get(pk=category_id)
-#     return render(request, 'wallet/category.html', {'goods': goods, 'category': category,
-#                                                     'title': 'Purchased goods'})
 
 def get_category(request, category_id):
     """Get category of purchased goods"""

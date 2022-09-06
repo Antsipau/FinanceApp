@@ -12,7 +12,7 @@ class Income(models.Model):
 
     @staticmethod
     def my_total_income():
-        """Sum the values оf column 'amount_of_income' """
+        """Sum the values оf the column: 'amount_of_income' """
         total = Income.objects.aggregate(TOTAL=Sum('amount_of_income'))['TOTAL']
         result = f'Your total income is: {total:.2f}'
         return result
@@ -33,7 +33,7 @@ class PurchasedGoods(models.Model):
     price_per_item = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True,
                                          verbose_name='Price per item')
     quantity_of_goods = models.IntegerField(null=True, blank=True, verbose_name='Quantity of goods')
-    category = models.ForeignKey('Category', on_delete=models.PROTECT, null=True)
+    category = models.ForeignKey('Category', on_delete=models.PROTECT, null=True, verbose_name='Category')
 
     def __str__(self):
         return self.name_of_product

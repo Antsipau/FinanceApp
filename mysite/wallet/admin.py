@@ -30,3 +30,6 @@ class CategoryAdmin(admin.ModelAdmin):
 admin.site.register(Income, IncomeAdmin)
 admin.site.register(PurchasedGoods, PurchasedGoodsAdmin)
 admin.site.register(Category, CategoryAdmin)
+
+admin.site.site_title = 'E-Wallet'
+admin.site.site_header = 'E-Wallet administration '

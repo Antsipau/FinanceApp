@@ -18,7 +18,7 @@ def income(request):
 
 def my_purchased_goods(request):
     """Display purchased goods"""
-    my_goods = PurchasedGoods.objects.all()
+    my_goods = PurchasedGoods.objects.select_related('category').all()
     context = {
         'my_goods': my_goods,
         'title': 'Purchased goods',
@@ -53,7 +53,7 @@ def add_purchase(request):
 
 def get_category(request, category_id):
     """Get category of purchased goods"""
-    goods = PurchasedGoods.objects.filter(category_id=category_id)
+    goods = PurchasedGoods.objects.select_related('category').filter(category_id=category_id)
     category = get_object_or_404(Category, pk=category_id)
 
     Category.objects.get(pk=category_id)

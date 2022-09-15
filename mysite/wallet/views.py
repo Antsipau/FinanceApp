@@ -1,6 +1,50 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import IncomeForm, PurchaseForm
+from .forms import IncomeForm, PurchaseForm, UserRegisterForm, UserLoginForm
 from .models import Income, PurchasedGoods, Category
+from django.contrib import messages
+from django.contrib.auth import login, logout
+from django.core.mail import send_mail
+
+
+def register(request):
+    """Register user and send e-mail"""
+    if request.method == 'POST':
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            send_mail('Registration',
+                      'Registration complete',
+                      'Ivan-Jrankel@yandex.ru',
+                      [user.email],
+                      fail_silently=False)
+            login(request, user)
+            messages.success(request, 'You have successfully registered')
+            return redirect('home')
+        else:
+            messages.error(request, 'Registration error')
+    else:
+        form = UserRegisterForm()
+    return render(request, 'wallet/registration_page.html', {'form': form, 'title': 'Registration'})
+
+
+def user_login(request):
+    """Login user"""
+    if request.method == 'POST':
+        form = UserLoginForm(data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect('home')
+    else:
+        form = UserLoginForm()
+    return render(request, 'wallet/sign_in_page.html', {'form': form, 'title': 'Login'})
+
+
+def user_logout(request):
+    """Logout user"""
+    logout(request)
+    return redirect('sign_in')
 
 
 def main_page(request):
@@ -8,6 +52,7 @@ def main_page(request):
     return render(request, 'wallet/main_page.html', {'title': 'Home page'})
 
 
+@login_required
 def income(request):
     """Display income page"""
     my_income = Income.objects.all()
@@ -16,6 +61,7 @@ def income(request):
                                                        'total_income': Income.my_total_income()})
 
 
+@login_required
 def my_purchased_goods(request):
     """Display purchased goods"""
     my_goods = PurchasedGoods.objects.select_related('category').all()
@@ -27,6 +73,7 @@ def my_purchased_goods(request):
     return render(request, 'wallet/purchased_goods_page.html', context=context)
 
 
+@login_required
 def add_income(request):
     """Add information into Income Model"""
     if request.method == 'POST':
@@ -39,6 +86,7 @@ def add_income(request):
     return render(request, 'wallet/add_income_page.html', {'form': form, 'title': 'Add income'})
 
 
+@login_required
 def add_purchase(request):
     """Add information into PurchasedGoods Model"""
     if request.method == 'POST':
@@ -51,6 +99,7 @@ def add_purchase(request):
     return render(request, 'wallet/add_purchase_page.html', {'form': form, 'title': 'Add purchase'})
 
 
+@login_required
 def get_category(request, category_id):
     """Get category of purchased goods"""
     goods = PurchasedGoods.objects.select_related('category').filter(category_id=category_id)

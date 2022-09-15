@@ -4,6 +4,7 @@
 {{ title }}
 {% endblock %}
 
+
 {% block section %}
 <div class="container">
     <div class="row">
@@ -23,7 +24,7 @@
         </div>
         <div class="col-xl-3 col-md-6 col-sm-12">
             <div align="center">
-                <a class="app_circle" role="button" id="register_button">
+                <a class="app_circle" role="button" id="register_button"  href="{% url 'registration' %}">
                     <i class="fa-solid fa-2xl fa-address-card fa-shake"></i>
                 </a>
             </div>
@@ -32,7 +33,7 @@
         </div>
         <div class="col-xl-3 col-md-6 col-sm-12">
             <div align="center">
-                <a class="app_circle" role="button" id="sign_in_button">
+                <a class="app_circle" role="button" id="sign_in_button" href="{% url 'sign_in' %}">
                     <i class="fa-solid fa-2xl fa-right-to-bracket fa-beat-fade"></i>
                 </a>
             </div>
@@ -41,7 +42,7 @@
         </div>
         <div class="col-xl-3 col-md-6 col-sm-12">
             <div align="center">
-                <a class="app_circle" role="button" id="log_out_button">
+                <a class="app_circle" role="button" id="log_out_button"  href="{% url 'logout' %}">
                     <i class="fa-solid fa-2xl fa-right-from-bracket fa-beat-fade"></i>
                 </a>
             </div>

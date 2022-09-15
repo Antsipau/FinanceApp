@@ -1,0 +1,22 @@
+{% extends "wallet/main_page.html" %}
+
+{% block content%}
+<div>
+    <h1 align="center" class="text-white">Login</h1>
+</div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-4">
+            <div align="center">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn btn-success">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

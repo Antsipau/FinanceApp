@@ -3,6 +3,13 @@
         <div class="row">
             <div class="col-12">
               <h1 class="text-center text-white">E-Wallet</h1>
+                <div align="center">
+                    <h4 class="text-center, text-white">
+                        {% if request.user.is_authenticated %}
+                        You are logged in as {{ user.username }}.
+                        {% endif %}
+                    </h4>
+                </div>
             </div>
         </div>
     </div>

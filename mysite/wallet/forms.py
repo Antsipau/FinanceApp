@@ -4,10 +4,12 @@ import re
 from django.core.exceptions import ValidationError
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
+from captcha.fields import CaptchaField
 
 
 class UserRegisterForm(UserCreationForm):
     """Form for filling in information about user to registrate"""
+    captcha = CaptchaField()
 
     def clean_username(self):
         """Validate field value. First character must be a letter"""

@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'captcha',
     'wallet.apps.WalletConfig',
     'fontawesomefree',
     'debug_toolbar',
@@ -137,4 +138,4 @@ EMAIL_PORT = 465
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
 EMAIL_HOST_USER = 'Ivan-Jrankel@yandex.ru'
-EMAIL_HOST_PASSWORD = 'jyqvtjrzqinihfwg'
+EMAIL_HOST_PASSWORD = ''

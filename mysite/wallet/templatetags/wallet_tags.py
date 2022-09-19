@@ -1,5 +1,6 @@
 from django import template
 from django.db.models import Count
+from django.core.cache import cache
 
 from wallet.models import Category
 
@@ -14,5 +15,8 @@ def get_categories():
 
 @register.inclusion_tag('wallet/list_categories.html')
 def show_categories():
-    categories = Category.objects.annotate(cnt=Count('purchasedgoods')).filter(cnt__gt=0)
+    categories = cache.get('categories')
+    if not categories:
+        categories = Category.objects.annotate(cnt=Count('purchasedgoods')).filter(cnt__gt=0)
+        cache.set('categories', categories, 30)
     return {"categories": categories}

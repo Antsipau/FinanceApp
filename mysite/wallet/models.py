@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.db.models import Sum
+from django.contrib.auth.models import User
 
 
 class Income(models.Model):
@@ -9,6 +10,7 @@ class Income(models.Model):
     type_of_income = models.CharField(max_length=255, null=True, verbose_name='Type of income')
     amount_of_income = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True,
                                            verbose_name='Amount of income')
+    user = models.ForeignKey(User, on_delete=models.PROTECT, null=True, verbose_name='User')
 
     @staticmethod
     def my_total_income():
@@ -23,7 +25,7 @@ class Income(models.Model):
     class Meta:
         verbose_name = 'Income'
         verbose_name_plural = 'Incomes'
-        ordering = ['-date_of_income']
+        ordering = ['-id']
 
 
 class PurchasedGoods(models.Model):
@@ -34,6 +36,7 @@ class PurchasedGoods(models.Model):
                                          verbose_name='Price per item')
     quantity_of_goods = models.IntegerField(null=True, blank=True, verbose_name='Quantity of goods')
     category = models.ForeignKey('Category', on_delete=models.PROTECT, null=True, verbose_name='Category')
+    user = models.ForeignKey(User, on_delete=models.PROTECT, null=True, verbose_name='User')
 
     def __str__(self):
         return self.name_of_product
@@ -41,7 +44,7 @@ class PurchasedGoods(models.Model):
     class Meta:
         verbose_name = 'Purchased good'
         verbose_name_plural = 'Purchased goods'
-        ordering = ['-date_of_purchase']
+        ordering = ['-id']
 
 
 class Category(models.Model):

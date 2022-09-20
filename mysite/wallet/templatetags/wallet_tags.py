@@ -17,6 +17,7 @@ def get_categories():
 def show_categories():
     categories = cache.get('categories')
     if not categories:
-        categories = Category.objects.annotate(cnt=Count('purchasedgoods')).filter(cnt__gt=0)
-        cache.set('categories', categories, 30)
+        categories = Category.objects.all()
+        # categories = Category.objects.annotate(cnt=Count('purchasedgoods'))
+        cache.set('categories', categories, 10)
     return {"categories": categories}

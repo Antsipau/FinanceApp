@@ -4,19 +4,19 @@ from .models import Income, PurchasedGoods, Category
 
 
 class IncomeAdmin(admin.ModelAdmin):
-    list_display = ('id', 'date_of_income', 'amount_of_income', 'type_of_income')
+    list_display = ('id', 'date_of_income', 'amount_of_income', 'type_of_income', 'user')
     list_display_links = ('id', 'date_of_income')
     search_fields = ('date_of_income', 'type_of_income')
-    list_filter = ('type_of_income',)
+    list_filter = ('type_of_income', 'user')
     list_editable = ('amount_of_income', 'type_of_income')
 
 
 class PurchasedGoodsAdmin(admin.ModelAdmin):
     list_display = ('id', 'date_of_purchase', 'name_of_product', 'price_per_item', 'quantity_of_goods',
-                    'category')
+                    'category', 'user')
     list_display_links = ('id', 'date_of_purchase')
     search_fields = ('date_of_purchase', 'name_of_product', 'quantity_of_goods', 'category')
-    list_filter = ('name_of_product', 'quantity_of_goods', 'price_per_item', 'category')
+    list_filter = ('name_of_product', 'quantity_of_goods', 'price_per_item', 'category', 'user')
     list_editable = ('name_of_product', 'quantity_of_goods', 'price_per_item')
 
 

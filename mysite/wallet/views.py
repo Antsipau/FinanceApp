@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
+
 from .forms import IncomeForm, PurchaseForm, UserRegisterForm, UserLoginForm
 from .models import Income, PurchasedGoods, Category
 from django.contrib import messages
@@ -38,13 +39,13 @@ def user_login(request):
             return redirect('home')
     else:
         form = UserLoginForm()
-    return render(request, 'wallet/sign_in_page.html', {'form': form, 'title': 'Login'})
+    return render(request, 'wallet/login.html', {'form': form, 'title': 'Login'})
 
 
 def user_logout(request):
     """Logout user"""
     logout(request)
-    return redirect('sign_in')
+    return redirect('home')
 
 
 def main_page(request):
@@ -55,7 +56,7 @@ def main_page(request):
 @login_required
 def income(request):
     """Display income page"""
-    my_income = Income.objects.all()
+    my_income = Income.objects.filter(user=request.user)
     return render(request, 'wallet/income_page.html', {'my_income': my_income,
                                                        'title': 'My incomes',
                                                        'total_income': Income.my_total_income()})
@@ -64,7 +65,7 @@ def income(request):
 @login_required
 def my_purchased_goods(request):
     """Display purchased goods"""
-    my_goods = PurchasedGoods.objects.select_related('category').all()
+    my_goods = PurchasedGoods.objects.select_related('category').filter(user=request.user)
     context = {
         'my_goods': my_goods,
         'title': 'Purchased goods',
@@ -76,8 +77,9 @@ def my_purchased_goods(request):
 @login_required
 def add_income(request):
     """Add information into Income Model"""
+    user = Income(user=request.user)
     if request.method == 'POST':
-        form = IncomeForm(request.POST)
+        form = IncomeForm(request.POST, instance=user)
         if form.is_valid():
             form.save()
             return redirect('home')
@@ -89,8 +91,9 @@ def add_income(request):
 @login_required
 def add_purchase(request):
     """Add information into PurchasedGoods Model"""
+    user = PurchasedGoods(user=request.user)
     if request.method == 'POST':
-        form = PurchaseForm(request.POST)
+        form = PurchaseForm(request.POST, instance=user)
         if form.is_valid():
             form.save()
             return redirect('home')
@@ -102,10 +105,26 @@ def add_purchase(request):
 @login_required
 def get_category(request, category_id):
     """Get category of purchased goods"""
-    goods = PurchasedGoods.objects.select_related('category').filter(category_id=category_id)
+    goods = PurchasedGoods.objects.select_related('category').filter(category_id=category_id, user=request.user)
     category = get_object_or_404(Category, pk=category_id)
 
     Category.objects.get(pk=category_id)
     return render(request, 'wallet/category.html', {'goods': goods,
                                                     'category_item': category,
                                                     'title': 'Purchased goods'})
+
+
+def total_income():
+    pass
+
+
+def total_expenses():
+    pass
+
+
+def expenses():
+    pass
+
+
+def current_balance():
+    pass

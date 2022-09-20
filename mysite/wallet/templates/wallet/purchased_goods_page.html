@@ -21,7 +21,7 @@
                     </thead>
                     <tbody>
                     {% block goods%}
-                    {% for item in my_goods %}
+                    {% for item in my_goods reversed%}
                     <tr>
                         <td class="text-center text-white">{{item.date_of_purchase|date:"d-m-Y"}}</td>
                         <td class="text-center text-white">{{item.name_of_product}}</td>

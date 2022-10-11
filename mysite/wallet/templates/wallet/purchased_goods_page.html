@@ -20,8 +20,8 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% block goods%}
-                    {% for item in my_goods reversed%}
+                    {% block goods %}
+                    {% for item in my_goods %}
                     <tr>
                         <td class="text-center text-white">{{item.date_of_purchase|date:"d-m-Y"}}</td>
                         <td class="text-center text-white">{{item.name_of_product}}</td>
@@ -35,6 +35,8 @@
                     {% endblock %}
                     </tbody>
                 </table>
+                <div class="text-center text-white">{{ user_expenses }}
+                </div>
             </div>
         </div>
     </div>

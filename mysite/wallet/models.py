@@ -13,11 +13,12 @@ class Income(models.Model):
     user = models.ForeignKey(User, on_delete=models.PROTECT, null=True, verbose_name='User')
 
     @staticmethod
-    def my_total_income():
-        """Sum the values оf the column: 'amount_of_income' """
-        total = Income.objects.aggregate(TOTAL=Sum('amount_of_income'))['TOTAL']
-        result = f'Your total income is: {total:.2f}'
-        return result
+    def user_income(request):
+        """Sum the values of the column: 'amount_of_income' for a specific user"""
+        total_income_result = 0
+        for i in request.user.income_set.all():
+            total_income_result += i.amount_of_income
+        return f'Your total income: {total_income_result:.2f}'
 
     def __str__(self):
         return self.type_of_income
@@ -38,6 +39,22 @@ class PurchasedGoods(models.Model):
     category = models.ForeignKey('Category', on_delete=models.PROTECT, null=True, verbose_name='Category')
     user = models.ForeignKey(User, on_delete=models.PROTECT, null=True, verbose_name='User')
 
+    @staticmethod
+    def user_expenses(request):
+        """Sum the values of the columns 'price_per_item' multiplied 'quantity_of_goods' for a specific user"""
+        total_expenses_result = 0
+        for i in request.user.purchasedgoods_set.all():
+            total_expenses_result += i.price_per_item * i.quantity_of_goods
+        return f'Your total expenses: {total_expenses_result:.2f}'
+
+    # @staticmethod
+    # def (request):
+    #     """Sum the values of the column: 'price_per_item' for a specific user"""
+    #     total_expenses_result = 0
+    #     for i in request.user.purchasedgoods_set.all():
+    #         total_expenses_result += i.price_per_item * i.quantity_of_goods
+    #     return f'Your total expenses: {total_expenses_result:.2f}'
+
     def __str__(self):
         return self.name_of_product
 
@@ -53,7 +70,7 @@ class Category(models.Model):
 
     def get_absolute_url(self):
         """Get a certain category"""
-        return reverse('category', kwargs={"category_id": self.pk})
+        return reverse('category', kwargs={'category_id': self.pk})
 
     def __str__(self):
         return self.title

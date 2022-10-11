@@ -1,8 +1,11 @@
 from django.contrib.auth.decorators import login_required
+from django.db.models import Sum
+from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 
 from .forms import IncomeForm, PurchaseForm, UserRegisterForm, UserLoginForm
 from .models import Income, PurchasedGoods, Category
+from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import login, logout
 from django.core.mail import send_mail
@@ -59,7 +62,7 @@ def income(request):
     my_income = Income.objects.filter(user=request.user)
     return render(request, 'wallet/income_page.html', {'my_income': my_income,
                                                        'title': 'My incomes',
-                                                       'total_income': Income.my_total_income()})
+                                                       'user_income': Income.user_income(request)})
 
 
 @login_required
@@ -69,6 +72,7 @@ def my_purchased_goods(request):
     context = {
         'my_goods': my_goods,
         'title': 'Purchased goods',
+        'user_expenses': PurchasedGoods.user_expenses(request),
     }
 
     return render(request, 'wallet/purchased_goods_page.html', context=context)
@@ -112,19 +116,3 @@ def get_category(request, category_id):
     return render(request, 'wallet/category.html', {'goods': goods,
                                                     'category_item': category,
                                                     'title': 'Purchased goods'})
-
-
-def total_income():
-    pass
-
-
-def total_expenses():
-    pass
-
-
-def expenses():
-    pass
-
-
-def current_balance():
-    pass

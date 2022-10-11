@@ -1,24 +1,10 @@
 {% load wallet_tags %}
-{% comment %}
-<div class="container mt-2">
-    <div class="row justify-content-center">
-        <div class="col-12">
+<div class="container-fluid">
+    <div class="row justify-content-md-center">
+        <div class="col-md-auto">
             <div align="center">
-                <div class="list-group text-center list-group-horizontal-md">
-                    {% get_list_categories as categories %}
-                    {% for item in categories %}
-                    <a href="{% item.get_absolute_url %}"
-                       class="list-group-item list-group-item-action list-group-item-info text-white">
-                        {{ item.title }}
-                    </a>
-                    {% endfor %}
-                </div>
+                {% show_categories request.user %}
             </div>
         </div>
     </div>
 </div>
-
-<br>
-{% endcomment %}
-
-{% show_categories %}

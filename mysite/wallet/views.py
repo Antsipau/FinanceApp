@@ -19,11 +19,11 @@ def register(request):
             user = form.save()
             send_mail('Registration',
                       'Registration complete',
-                      'Ivan-Jrankel@yandex.ru',
+                      'antsipau@gmail.com',
                       [user.email],
                       fail_silently=False)
             login(request, user)
-            messages.success(request, 'You have successfully registered')
+            messages.success(request, f'User {user} have successfully registered')
             return redirect('home')
         else:
             messages.error(request, 'Registration error')

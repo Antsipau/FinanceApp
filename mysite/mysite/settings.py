@@ -133,12 +133,14 @@ INTERNAL_IPS = ['127.0.0.1']
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-EMAIL_HOST = 'smtp.yandex.ru'
-EMAIL_PORT = 465
-EMAIL_USE_TLS = False
-EMAIL_USE_SSL = True
-EMAIL_HOST_USER = 'Ivan-Jrankel@yandex.ru'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_FROM = 'antsipau@gmail.com'
+EMAIL_HOST_USER = 'antsipau@gmail.com'
 EMAIL_HOST_PASSWORD = ''
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+PASSWORD_RESET_TIMEOUT = 14400
 
 CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge'
 

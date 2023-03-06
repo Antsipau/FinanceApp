@@ -1,3 +1,5 @@
+from urllib import request
+
 from django import template
 from django.db.models import Count
 from django.core.cache import cache
@@ -13,6 +15,13 @@ register = template.Library()
 def show_categories(user):
     categories = cache.get('categories')
     if not categories:
-        categories = Category.objects.annotate(cnt=Count('purchasedgoods', filter=Q(purchasedgoods__user__id=user.id)))
+        categories = Category.objects.filter(
+            purchasedgoods__user__id=user.id
+        ).annotate(
+            cnt=Count('purchasedgoods'
+                      )
+        ).filter(
+            cnt__gt=0
+        )
         cache.set('categories', categories, 10)
     return {"categories": categories}

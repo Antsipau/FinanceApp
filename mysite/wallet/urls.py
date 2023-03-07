@@ -1,5 +1,5 @@
 from django.urls import path
-
+from . import views
 from .views import *
 
 urlpatterns = [
@@ -12,4 +12,5 @@ urlpatterns = [
     path('category/<int:category_id>/', get_category, name='category'),
     path('add_income_page/', add_income, name='add_income'),
     path('add_purchase_page/', add_purchase, name='add_purchase'),
+    path('activate/<uidb64>/<token>', activate, name='activate'),
 ]

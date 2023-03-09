@@ -2,7 +2,7 @@ from django import forms
 from .models import Income, PurchasedGoods
 import re
 from django.core.exceptions import ValidationError
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm
 from django.contrib.auth.models import User
 from captcha.fields import CaptchaField
 
@@ -27,6 +27,27 @@ class UserRegisterForm(UserCreationForm):
             attrs={'class': 'form-control', 'placeholder': 'Repeat password'})
         self.fields['password1'].help_text = ''
         self.fields['password2'].help_text = ''
+
+# class UserChangePasswordForm(PasswordChangeForm):
+#         """Form for filling in information about user to registrate"""
+#
+#     def clean_username(self):
+#         """Validate field value. First character must be a letter"""
+#         username = self.cleaned_data['username']
+#         if re.match(r'\d', username):
+#             raise ValidationError('First character must be a letter')
+#         return username
+#
+#     def __init__(self, *args, **kwargs):
+#         """Set attributes for fields"""
+#         super(UserChangePasswordForm, self).__init__(*args, **kwargs)
+#         self.fields['password1'].widget = forms.PasswordInput(
+#             attrs={'class': 'form-control', 'placeholder': 'Password from numbers and letters'})
+#         self.fields['password2'].widget = forms.PasswordInput(
+#             attrs={'class': 'form-control', 'placeholder': 'Repeat password'})
+#         self.fields['password1'].help_text = ''
+#         self.fields['password2'].help_text = ''
+
 
     class Meta:
         model = User

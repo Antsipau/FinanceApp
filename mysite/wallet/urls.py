@@ -1,5 +1,4 @@
 from django.urls import path
-from . import views
 from .views import *
 
 urlpatterns = [
@@ -13,4 +12,5 @@ urlpatterns = [
     path('add_income_page/', add_income, name='add_income'),
     path('add_purchase_page/', add_purchase, name='add_purchase'),
     path('activate/<uidb64>/<token>', activate, name='activate'),
+    path('accounts/change_password', change_password, name='change_password')
 ]

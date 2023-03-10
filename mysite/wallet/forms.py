@@ -28,27 +28,6 @@ class UserRegisterForm(UserCreationForm):
         self.fields['password1'].help_text = ''
         self.fields['password2'].help_text = ''
 
-# class UserChangePasswordForm(PasswordChangeForm):
-#         """Form for filling in information about user to registrate"""
-#
-#     def clean_username(self):
-#         """Validate field value. First character must be a letter"""
-#         username = self.cleaned_data['username']
-#         if re.match(r'\d', username):
-#             raise ValidationError('First character must be a letter')
-#         return username
-#
-#     def __init__(self, *args, **kwargs):
-#         """Set attributes for fields"""
-#         super(UserChangePasswordForm, self).__init__(*args, **kwargs)
-#         self.fields['password1'].widget = forms.PasswordInput(
-#             attrs={'class': 'form-control', 'placeholder': 'Password from numbers and letters'})
-#         self.fields['password2'].widget = forms.PasswordInput(
-#             attrs={'class': 'form-control', 'placeholder': 'Repeat password'})
-#         self.fields['password1'].help_text = ''
-#         self.fields['password2'].help_text = ''
-
-
     class Meta:
         model = User
         fields = ('username', 'email', 'password1', 'password2')
@@ -83,6 +62,40 @@ class UserLoginForm(AuthenticationForm):
             attrs={'class': 'form-control', 'placeholder': 'Password from numbers and letters', 'autocomplete': 'off'})
         self.fields['username'].help_text = ''
         self.fields['password'].help_text = ''
+
+
+class ChangePasswordForm(PasswordChangeForm):
+    """Form for filling in information to change password"""
+
+    def __init__(self, *args, **kwargs):
+        """Set attributes for fields"""
+        super(ChangePasswordForm, self).__init__(*args, **kwargs)
+        self.fields['old_password'].widget = forms.PasswordInput(
+            attrs={'class': 'form-control', 'placeholder': 'Old password'})
+        self.fields['new_password1'].widget = forms.PasswordInput(
+            attrs={'class': 'form-control', 'placeholder': 'New password'})
+        self.fields['new_password2'].widget = forms.PasswordInput(
+            attrs={'class': 'form-control', 'placeholder': 'Repeat password'})
+        self.fields['old_password'].help_text = ''
+        self.fields['new_password1'].help_text = ''
+        self.fields['new_password2'].help_text = ''
+
+    class Meta:
+        model = User
+        fields = ('old_password', 'new_password1', 'new_password2')
+        help_texts = {
+            'old_password': None,
+            'new_password1': None,
+            'new_password2': None,
+        }
+        widgets = {
+            'old_password': forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'old_password',
+                                                       'autocomplete': 'off'}),
+            'new_password1': forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'new_password1',
+                                                        'autocomplete': 'off'}),
+            'new_password2': forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'new_password2',
+                                                        'autocomplete': 'off'}),
+        }
 
 
 class IncomeForm(forms.ModelForm):

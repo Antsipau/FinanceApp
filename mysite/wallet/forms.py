@@ -110,9 +110,26 @@ class ResetPasswordForm(PasswordResetForm):
 
 
 class PasswordSetForm(SetPasswordForm):
+    def __init__(self, *args, **kwargs):
+        """Set attributes for fields"""
+        super(PasswordSetForm, self).__init__(*args, **kwargs)
+        self.fields['new_password1'].widget = forms.PasswordInput(
+            attrs={'class': 'form-control', 'placeholder': 'New password'})
+        self.fields['new_password2'].widget = forms.PasswordInput(
+            attrs={'class': 'form-control', 'placeholder': 'Repeat password'})
+        self.fields['new_password1'].help_text = ''
+        self.fields['new_password2'].help_text = ''
+
     class Meta:
         model = get_user_model()
         fields = ['new_password1', 'new_password2']
+
+    widgets = {
+        'new_password1': forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'new_password1',
+                                                    'autocomplete': 'off'}),
+        'new_password2': forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'new_password2',
+                                                    'autocomplete': 'off'}),
+    }
 
 
 class IncomeForm(forms.ModelForm):

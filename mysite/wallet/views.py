@@ -166,7 +166,7 @@ def reset_password_confirm(request, uidb64, token):
             form = PasswordSetForm(user, request.POST)
             if form.is_valid():
                 form.save()
-                messages.success(request, "Your password has been set. You may go ahead and <b>log in </b> now.")
+                messages.success(request, "Your password has been set. You may go ahead and log in now.")
                 return redirect('home')
             else:
                 for error in list(form.errors.values()):

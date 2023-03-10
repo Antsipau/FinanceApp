@@ -2,7 +2,7 @@ from django import forms
 from .models import Income, PurchasedGoods
 import re
 from django.core.exceptions import ValidationError
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm, PasswordResetForm
 from django.contrib.auth.models import User
 from captcha.fields import CaptchaField
 
@@ -96,6 +96,14 @@ class ChangePasswordForm(PasswordChangeForm):
             'new_password2': forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'new_password2',
                                                         'autocomplete': 'off'}),
         }
+
+
+class ResetPasswordForm(PasswordResetForm):
+    """Form for fillint to reset password"""
+    captcha = CaptchaField()
+
+    def __init__(self, *args, **kwargs):
+        super(PasswordResetForm, self).__init__(*args, **kwargs)
 
 
 class IncomeForm(forms.ModelForm):

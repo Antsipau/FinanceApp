@@ -12,5 +12,7 @@ urlpatterns = [
     path('add_income_page/', add_income, name='add_income'),
     path('add_purchase_page/', add_purchase, name='add_purchase'),
     path('activate/<uidb64>/<token>', activate, name='activate'),
-    path('accounts/change_password', change_password, name='change_password')
+    path('accounts/change_password', change_password, name='change_password'),
+    path('reset_password', reset_password, name='reset_password'),
+    path('reset/<uidb64>/<token>', reset_password_confirm, name='reset_password_confirm'),
 ]

@@ -16,6 +16,11 @@
                     </div>
                 </form>
             </div>
+            {% if not request.user.is_authenticated %}
+            <div align="center">
+                <a href="{% url 'reset_password' %}" style="color: white">forgot password?</a>
+            </div>
+            {% endif %}
         </div>
     </div>
 </div>

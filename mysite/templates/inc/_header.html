@@ -7,6 +7,11 @@
                     <h4 class="text-center, text-white">
                         {% if request.user.is_authenticated %}
                         You are logged in as {{ user.username }}.
+                        <div align="center">
+                            <h6> To change password click the link:
+                                <a href="{% url 'change_password' %}" style="color: white">change password</a>
+                            </h6>
+                        </div>
                         {% endif %}
                     </h4>
                 </div>

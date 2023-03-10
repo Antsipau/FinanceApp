@@ -9,9 +9,8 @@ from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.auth import update_session_auth_hash
-from django.contrib.auth.forms import PasswordChangeForm
 
-from .forms import IncomeForm, PurchaseForm, UserRegisterForm, UserLoginForm
+from .forms import IncomeForm, PurchaseForm, UserRegisterForm, UserLoginForm, ChangePasswordForm
 from .models import Income, PurchasedGoods, Category
 from .tokens import account_activation_token
 
@@ -98,7 +97,7 @@ def user_logout(request):
 def change_password(request):
     """Change password for user"""
     if request.method == 'POST':
-        form = PasswordChangeForm(request.user, request.POST)
+        form = ChangePasswordForm(request.user, request.POST)
         if form.is_valid():
             user = form.save()
             update_session_auth_hash(request, user)  # Important!
@@ -107,7 +106,7 @@ def change_password(request):
         else:
             messages.error(request, 'Please correct the error below.')
     else:
-        form = PasswordChangeForm(request.user)
+        form = ChangePasswordForm(request.user)
     return render(request, 'wallet/change_password.html', {'form': form, 'title': 'Change Password'})
 
 

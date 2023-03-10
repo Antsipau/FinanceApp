@@ -21,6 +21,12 @@ class UserRegisterForm(UserCreationForm):
             raise ValidationError('First character must be a letter')
         return username
 
+    def clean_email(self):
+        email = self.cleaned_data["email"]
+        if User.objects.filter(email=email).exists():
+            raise ValidationError("An user with this email already exists!")
+        return email
+
     def __init__(self, *args, **kwargs):
         """Set attributes for fields"""
         super(UserRegisterForm, self).__init__(*args, **kwargs)

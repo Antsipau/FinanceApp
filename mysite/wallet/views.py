@@ -11,7 +11,8 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.auth import update_session_auth_hash
 from django.db.models.query_utils import Q
 
-from .forms import IncomeForm, PurchaseForm, UserRegisterForm, UserLoginForm, ChangePasswordForm, ResetPasswordForm
+from .forms import IncomeForm, PurchaseForm, UserRegisterForm, UserLoginForm, ChangePasswordForm, \
+    ResetPasswordForm, PasswordSetForm
 from .models import Income, PurchasedGoods, Category
 from .tokens import account_activation_token
 
@@ -128,14 +129,18 @@ def reset_password(request):
                 })
                 email = EmailMessage(subject, message, to=[associated_user.email])
                 if email.send():
-                    messages.success(request, """Password reset sent.
-                    We've emailed you instructions for setting your password, 
-                    if an account exists with the email you entered. 
-                    You should receive them shortly.
-                    If you don't receive an email, please make sure you've entered the address 
-                    you registered with, and check your spam folder.""")
+                    messages.success(request,
+                                     """
+                        <h2>Password reset sent</h2><hr>
+                        <p>
+                            We've emailed you instructions for setting your password, if an account exists with the email you entered. 
+                            You should receive them shortly.<br>If you don't receive an email, please make sure you've entered the address 
+                            you registered with, and check your spam folder.
+                        </p>
+                        """
+                                     )
                 else:
-                    messages.error(request, "Problem sending reset password email, SERVER PROBLEM")
+                    messages.error(request, "Problem sending reset password email, <b>SERVER PROBLEM</b>")
 
             return redirect('home')
 
@@ -158,7 +163,7 @@ def reset_password_confirm(request, uidb64, token):
 
     if user is not None and account_activation_token.check_token(user, token):
         if request.method == 'POST':
-            form = ChangePasswordForm(user, request.POST)
+            form = PasswordSetForm(user, request.POST)
             if form.is_valid():
                 form.save()
                 messages.success(request, "Your password has been set. You may go ahead and <b>log in </b> now.")
@@ -167,7 +172,7 @@ def reset_password_confirm(request, uidb64, token):
                 for error in list(form.errors.values()):
                     messages.error(request, error)
 
-        form = ChangePasswordForm(user)
+        form = PasswordSetForm(user)
         return render(request, 'wallet/reset_password_confirm.html', {'form': form})
     else:
         messages.error(request, "Link is expired")

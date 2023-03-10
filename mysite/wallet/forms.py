@@ -22,6 +22,7 @@ class UserRegisterForm(UserCreationForm):
         return username
 
     def clean_email(self):
+        """Check email for uniqueness"""
         email = self.cleaned_data["email"]
         if User.objects.filter(email=email).exists():
             raise ValidationError("An user with this email already exists!")
@@ -30,6 +31,7 @@ class UserRegisterForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         """Set attributes for fields"""
         super(UserRegisterForm, self).__init__(*args, **kwargs)
+        self.fields['email'].required = True
         self.fields['password1'].widget = forms.PasswordInput(
             attrs={'class': 'form-control', 'placeholder': 'Password from numbers and letters'})
         self.fields['password2'].widget = forms.PasswordInput(
@@ -108,14 +110,19 @@ class ChangePasswordForm(PasswordChangeForm):
 
 
 class ResetPasswordForm(PasswordResetForm):
-    """Form for fillint to reset password"""
+    """Form for filling to reset password"""
     captcha = CaptchaField()
 
     def __init__(self, *args, **kwargs):
+        """Set attributes for fields"""
         super(PasswordResetForm, self).__init__(*args, **kwargs)
+        self.fields['email'].widget = forms.EmailInput(
+            attrs={'class': 'form-control', 'placeholder': 'E-mail address'})
 
 
 class PasswordSetForm(SetPasswordForm):
+    """Form for filling to set new password after reset"""
+
     def __init__(self, *args, **kwargs):
         """Set attributes for fields"""
         super(PasswordSetForm, self).__init__(*args, **kwargs)

@@ -113,6 +113,7 @@ def change_password(request):
 
 
 def reset_password(request):
+    """Reset password for user"""
     if request.method == 'POST':
         form = ResetPasswordForm(request.POST)
         if form.is_valid():
@@ -129,16 +130,12 @@ def reset_password(request):
                 })
                 email = EmailMessage(subject, message, to=[associated_user.email])
                 if email.send():
-                    messages.success(request,
-                                     """
-                        <h2>Password reset sent</h2><hr>
-                        <p>
-                            We've emailed you instructions for setting your password, if an account exists with the email you entered. 
-                            You should receive them shortly.<br>If you don't receive an email, please make sure you've entered the address 
-                            you registered with, and check your spam folder.
-                        </p>
-                        """
-                                     )
+                    messages.success(request, """Password reset sent.
+                    We've emailed you instructions for setting your password, 
+                    if an account exists with the email you entered. 
+                    You should receive them shortly. 
+                    If you don't receive an email, please make sure you've entered the address 
+                    you registered with, and check your spam folder.""")
                 else:
                     messages.error(request, "Problem sending reset password email, <b>SERVER PROBLEM</b>")
 
@@ -154,6 +151,7 @@ def reset_password(request):
 
 
 def reset_password_confirm(request, uidb64, token):
+    """Confirm reset of password"""
     user = get_user_model()
     try:
         uid = force_str(urlsafe_base64_decode(uidb64))

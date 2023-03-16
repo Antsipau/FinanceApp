@@ -190,7 +190,11 @@ def income(request):
     my_income = Income.objects.filter(user=request.user)
     return render(request, 'wallet/income_page.html', {'my_income': my_income,
                                                        'title': 'My incomes',
-                                                       'user_income': Income.user_income(request)})
+                                                       'total_user_income': Income.total_user_income(request),
+                                                       'current_month_income': Income.current_month_income(request),
+                                                       'previous_year_income': Income.previous_year_income(request),
+                                                       'current_year_income': Income.current_year_income(request),
+                                                       'income_difference': Income.income_difference(request)})
 
 
 @login_required

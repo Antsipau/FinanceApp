@@ -23,6 +23,25 @@
                     {% endfor %}
                     </tbody>
                 </table>
+                <nav aria-label="Page navigation">
+                    <ul style="" class="pagination justify-content-center">
+                        {% if my_income.has_previous %}
+                        <li class="page-item"><a class="page-link"
+                                                 href="?page={{my_income.previous_page_number }}">previous</a></li>
+                        {% endif %}
+                        {% for page in my_income.paginator.page_range %}
+                        {% if page == my_income.number %}
+                        <li class="page-item active"><a class="page-link" href="?page={{page}}">{{page}}</a></li>
+                        {% elif page > my_income.number|add:-3 and page < my_income.number|add:3 %}
+                        <li class="page-item"><a class="page-link" href="?page={{page}}">{{page}}</a></li>
+                        {% endif %}
+                        {% endfor %}
+                        {% if my_income.has_next %}
+                        <li class="page-item"><a class="page-link"
+                                                 href="?page={{my_income.next_page_number}}">next</a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
                 <div class="text-center text-white">{{ total_user_income }}
                 </div>
                 <div class="text-center text-white">{{ current_month_income }}

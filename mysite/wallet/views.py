@@ -10,6 +10,7 @@ from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.auth import update_session_auth_hash
 from django.db.models.query_utils import Q
+from django.core.paginator import *
 
 from .forms import IncomeForm, PurchaseForm, UserRegisterForm, UserLoginForm, ChangePasswordForm, \
     ResetPasswordForm, PasswordSetForm
@@ -188,6 +189,11 @@ def main_page(request):
 def income(request):
     """Display income page"""
     my_income = Income.objects.filter(user=request.user)
+    paginator = Paginator(my_income, 5)
+
+    page_number = request.GET.get('page')  # GET параметр page
+    my_income = paginator.get_page(page_number)
+
     return render(request, 'wallet/income_page.html', {'my_income': my_income,
                                                        'title': 'My incomes',
                                                        'total_user_income': Income.total_user_income(request),
@@ -201,6 +207,9 @@ def income(request):
 def my_purchased_goods(request):
     """Display purchased goods"""
     my_goods = PurchasedGoods.objects.select_related('category').filter(user=request.user)
+    paginator = Paginator(my_goods, 5)
+    page_number = request.GET.get('page')  # GET параметр page
+    my_goods = paginator.get_page(page_number)
     context = {
         'my_goods': my_goods,
         'title': 'Purchased goods',

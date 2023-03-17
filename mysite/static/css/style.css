@@ -102,3 +102,35 @@ header, footer, section {
     background-color: transparent;
     border-color: #FFFF00;
 }
+
+.pagination > li > a
+{
+    background-color: transparent;
+    color: white;
+    border-color: #FFFF00;
+}
+
+.pagination > li > a:focus,
+.pagination > li > a:hover,
+.pagination > li > span:focus,
+.pagination > li > span:hover
+{
+    color: white;
+    background-color: transparent;
+    border-color: #FFFF00;
+}
+
+.pagination > .active > a
+{
+    color: white;
+    background-color: transparent;
+    border: solid 3px #FFFF00;
+    border-color: #FFFF00;
+}
+
+.pagination > .active > a:hover
+{
+    background-color: transparent;
+    border: solid 3px #FFFF00;
+    border-color: #FFFF00;
+}

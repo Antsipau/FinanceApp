@@ -113,6 +113,8 @@ class PurchasedGoods(models.Model):
             total_expenses_result += i.price_per_item * i.quantity_of_goods
         return f'Your total expenses: {total_expenses_result:.2f}'
 
+
+
     # @staticmethod
     # def (request):
     #     """Sum the values of the column: 'price_per_item' for a specific user"""
@@ -145,3 +147,7 @@ class Category(models.Model):
         verbose_name = 'Category'
         verbose_name_plural = 'Categories'
         ordering = ['title']
+
+def diff(request):
+    ref_inc = Income.previous_year_income(request)
+    pass

@@ -14,11 +14,11 @@ class Income(models.Model):
 
     @staticmethod
     def total_user_income(request):
-        """Sum the values of the column: 'amount_of_income' for a specific user"""
+        """Sum income for entire period"""
         total_income_result = 0
         for i in request.user.income_set.all():
             total_income_result += i.amount_of_income
-        return f'Your total income for the entire period: {total_income_result:.2f}.'
+        return total_income_result
 
     @staticmethod
     def previous_year_income(request):
@@ -28,8 +28,7 @@ class Income(models.Model):
         result = request.user.income_set.all()
         for i in result.filter(date_of_income__year=previous_year):
             total_income_result += i.amount_of_income
-        return f'Your income in  previous {previous_year} year: ' \
-               f'{total_income_result:.2f}.'
+        return {previous_year: total_income_result}
 
     @staticmethod
     def current_year_income(request):
@@ -39,8 +38,7 @@ class Income(models.Model):
         result = request.user.income_set.all()
         for i in result.filter(date_of_income__year=current_year):
             total_income_result += i.amount_of_income
-        return f'Your income in current {current_year} year: ' \
-               f'{total_income_result:.2f}.'
+        return {current_year: total_income_result}
 
     @staticmethod
     def income_difference(request):
@@ -54,13 +52,12 @@ class Income(models.Model):
             current_year_income += i.amount_of_income
         for i in result.filter(date_of_income__year=previous_year):
             previous_year_income += i.amount_of_income
-        total_income_difference = current_year_income - previous_year_income
-        if current_year_income < previous_year_income:
-            return f"In {current_year} year, you earned {-total_income_difference} less than last {previous_year} year."
-        if current_year_income > previous_year_income:
-            return f"In {current_year} year, you earned {total_income_difference} more than last {previous_year} year."
-        if current_year_income == previous_year_income:
-            return f"You earned the same amount this {current_year} year as you did last {previous_year} year."
+        total_income_difference = abs(current_year_income - previous_year_income)
+        return {"current_year": current_year,
+                "current_year_income": current_year_income,
+                "previous_year": previous_year,
+                "previous_year_income": previous_year_income,
+                "difference": total_income_difference}
 
     @staticmethod
     def previous_month_income(request):
@@ -113,8 +110,6 @@ class PurchasedGoods(models.Model):
             total_expenses_result += i.price_per_item * i.quantity_of_goods
         return f'Your total expenses: {total_expenses_result:.2f}'
 
-
-
     # @staticmethod
     # def (request):
     #     """Sum the values of the column: 'price_per_item' for a specific user"""
@@ -147,6 +142,7 @@ class Category(models.Model):
         verbose_name = 'Category'
         verbose_name_plural = 'Categories'
         ordering = ['title']
+
 
 def diff(request):
     ref_inc = Income.previous_year_income(request)

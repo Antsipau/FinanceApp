@@ -28,7 +28,8 @@ class Income(models.Model):
         result = request.user.income_set.all()
         for i in result.filter(date_of_income__year=previous_year):
             total_income_result += i.amount_of_income
-        return {previous_year: total_income_result}
+        return {"previous_year": previous_year,
+                "total_income_result": total_income_result}
 
     @staticmethod
     def current_year_income(request):
@@ -38,7 +39,8 @@ class Income(models.Model):
         result = request.user.income_set.all()
         for i in result.filter(date_of_income__year=current_year):
             total_income_result += i.amount_of_income
-        return {current_year: total_income_result}
+        return {"current_year": current_year,
+                "total_income_result": total_income_result}
 
     @staticmethod
     def income_difference(request):
@@ -74,14 +76,14 @@ class Income(models.Model):
     @staticmethod
     def current_month_income(request):
         """Sum income for current month of current year"""
-        current_year = datetime.now().year
-        current_month = datetime.now().month
+        current_date = datetime.now()
         total_income_result = 0
         result = request.user.income_set.all()
-        for i in result.filter(date_of_income__year=current_year, date_of_income__month=current_month):
+        for i in result.filter(date_of_income__year=current_date.year, date_of_income__month=current_date.month):
             total_income_result += i.amount_of_income
-        return f'Your income in {datetime.now().strftime("%B")} {datetime.now().strftime("%Y")} year: ' \
-               f'{total_income_result:.2f}.'
+            return {"current_year": current_date.strftime("%Y"),
+                    "current_month": current_date.strftime("%B"),
+                    "total_income_result": total_income_result}
 
     def __str__(self):
         return self.type_of_income

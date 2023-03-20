@@ -42,18 +42,18 @@
                         {% endif %}
                     </ul>
                 </nav>
-                <div class="text-center text-white">Your total income for the entire period: {{ total_user_income }}
+                <div class="text-center text-white">Your total income for the entire period: {{ total_user_income }}.
                 </div>
-                <div class="text-center text-white">{{ current_month_income }}
+                <div class="text-center text-white">Your income in {{ current_month_income.current_month }}
+                    {{ current_month_income.current_year }} year: {{ current_month_income.total_income_result }}.
                 </div>
-                {% for year, income in current_year_income.items %}
-                <div class="text-center text-white">Your income in current {{ year }} year: {{ income }}.
+                <div class="text-center text-white">Your income in {{ current_year_income.current_year }} year:
+                    {{ current_year_income.total_income_result }}.
                 </div>
-                {% endfor %}
-                {% for year, income in previous_year_income.items %}
-                <div class="text-center text-white">Your income in previous {{ year }} year: {{ income }}.
+                <div class="text-center text-white">
+                    Your income in previous {{ previous_year_income.previous_year }} year:
+                    {{ previous_year_income.total_income_result }}.
                 </div>
-                {% endfor %}
                 {% if income_difference.current_year_income > income_difference.previous_year_income %}
                 <div class="text-center text-white">In {{ income_difference.current_year }} year,
                     you earned {{ income_difference.difference }} more
@@ -65,7 +65,7 @@
                     than last {{ income_difference.previous_year }} year.
                 </div>
                 {% elif income_difference.current_year_income == income_difference.previous_year_income %}
-                <div class="text-center text-white">You earned the same amount this {{ income_difference.current_year }}
+                <div class="text-center text-white">You earned the same amount in {{ income_difference.current_year }}
                     year as you did last {{ income_difference.previous_year }} year.
                 </div>
                 {% endif %}

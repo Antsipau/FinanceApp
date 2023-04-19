@@ -1,4 +1,5 @@
 {% extends "wallet/main_page.html" %}
+{% load custom_filters %}
 
 {% block content%}
 {% block categories %}
@@ -16,6 +17,7 @@
                         <th scope="col" class="text-center text-white">Name of product</th>
                         <th scope="col" class="text-center text-white">Price per item</th>
                         <th scope="col" class="text-center text-white">Quantity of goods</th>
+                        <th scope="col" class="text-center text-white">Total amount</th>
                         <th scope="col" class="text-center text-white">Category</th>
                     </tr>
                     </thead>
@@ -27,6 +29,7 @@
                         <td class="text-center text-white">{{item.name_of_product}}</td>
                         <td class="text-center text-white">{{item.price_per_item}}</td>
                         <td class="text-center text-white">{{item.quantity_of_goods}}</td>
+                        <td class="text-center text-white">{{item.quantity_of_goods|mul:item.price_per_item}}</td>
                         <td class="text-center text-white">
                             <a href="{{ item.category.get_absolute_url }}" style="color: white"> {{item.category}}</a>
                         </td>

@@ -1,0 +1,6 @@
+Django==4.1.7
+captcha==0.4
+fontawesomefree==6.3.0
+django_debug_toolbar==3.8.1
+django-simple-captcha==0.5.17
+six==1.16.0

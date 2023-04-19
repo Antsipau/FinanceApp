@@ -1,4 +1,5 @@
 {% extends "wallet/purchased_goods_page.html" %}
+{% load custom_filters %}
 
 {% block goods %}
 {% for item in goods %}
@@ -7,6 +8,7 @@
     <td class="text-center text-white">{{item.name_of_product}}</td>
     <td class="text-center text-white">{{item.price_per_item}}</td>
     <td class="text-center text-white">{{item.quantity_of_goods}}</td>
+    <td class="text-center text-white">{{item.quantity_of_goods|mul:item.price_per_item}}</td>
     <td class="text-center text-white">{{item.category}}</td>
 </tr>
 {% endfor %}

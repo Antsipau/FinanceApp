@@ -251,6 +251,9 @@ def add_purchase(request):
 def get_category(request, category_id):
     """Get category of purchased goods"""
     goods = PurchasedGoods.objects.select_related('category').filter(category_id=category_id, user=request.user)
+    paginator = Paginator(goods, 5)
+    page_number = request.GET.get('page')  # GET параметр page
+    goods = paginator.get_page(page_number)
     category = get_object_or_404(Category, pk=category_id)
 
     Category.objects.get(pk=category_id)

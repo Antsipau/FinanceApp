@@ -38,6 +38,7 @@
                     {% endblock %}
                     </tbody>
                 </table>
+                {% block paginator %}
                 <nav aria-label="Page navigation">
                     <ul style="" class="pagination justify-content-center">
                         {% if my_goods.has_previous %}
@@ -57,6 +58,7 @@
                         {% endif %}
                     </ul>
                 </nav>
+                {% endblock %}
                 <div class="text-center text-white">{{ user_expenses }}
                 </div>
             </div>

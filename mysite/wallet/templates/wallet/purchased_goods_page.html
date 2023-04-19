@@ -61,6 +61,31 @@
                 {% endblock %}
                 <div class="text-center text-white">{{ user_expenses }}
                 </div>
+                <div class="text-center text-white">Your expenses in {{ current_month_expenses.current_month }}
+                    {{ current_month_expenses.current_year }} year: {{ current_month_expenses.total_expenses_result }}.
+                </div>
+                <div class="text-center text-white">Your expenses in {{ current_year_expenses.current_year }} year:
+                    {{ current_year_expenses.total_expenses_result }}.
+                </div>
+                <div class="text-center text-white">
+                    Your expenses in previous {{ previous_year_expenses.previous_year }} year:
+                    {{ previous_year_expenses.total_expenses_result }}.
+                </div>
+                {% if expenses_difference.current_year_expenses > expenses_difference.previous_year_expenses %}
+                <div class="text-center text-white">In {{ expenses_difference.current_year }} year,
+                    you spent {{ expenses_difference.difference }} more
+                    than last {{ expenses_difference.previous_year }} year.
+                </div>
+                {% elif expenses_difference.current_year_expenses < expenses_difference.previous_year_expenses %}
+                <div class="text-center text-white">In {{ expenses_difference.current_year }} year,
+                    you spent {{ expenses_difference.difference }} less
+                    than last {{ expenses_difference.previous_year }} year.
+                </div>
+                {% elif expenses_difference.current_year_expenses == expenses_difference.previous_year_expenses %}
+                <div class="text-center text-white">You spent the same amount in {{ expenses_difference.current_year }}
+                    year as you did last {{ expenses_difference.previous_year }} year.
+                </div>
+                {% endif %}
             </div>
         </div>
     </div>

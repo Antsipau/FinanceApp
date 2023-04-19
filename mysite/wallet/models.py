@@ -112,70 +112,70 @@ class PurchasedGoods(models.Model):
             total_expenses_result += i.price_per_item * i.quantity_of_goods
         return f'Your total expenses: {total_expenses_result:.2f}'
 
-    # @staticmethod
-    # def previous_year_expenses(request):
-    #     """Sum income for previous year"""
-    #     previous_year = datetime.today().year - 1
-    #     total_income_result = 0
-    #     result = request.user.income_set.all()
-    #     for i in result.filter(date_of_income__year=previous_year):
-    #         total_income_result += i.amount_of_income
-    #     return {"previous_year": previous_year,
-    #             "total_income_result": total_income_result}
+    @staticmethod
+    def previous_year_expenses(request):
+        """Sum expenses for previous year"""
+        previous_year = datetime.today().year - 1
+        total_expenses_result = 0
+        result = request.user.purchasedgoods_set.all()
+        for i in result.filter(date_of_purchase__year=previous_year):
+            total_expenses_result += i.price_per_item * i.quantity_of_goods
+        return {"previous_year": previous_year,
+                "total_expenses_result": total_expenses_result}
     #
-    # @staticmethod
-    # def current_year_expenses(request):
-    #     """Sum income for current year"""
-    #     current_year = datetime.now().year
-    #     total_income_result = 0
-    #     result = request.user.income_set.all()
-    #     for i in result.filter(date_of_income__year=current_year):
-    #         total_income_result += i.amount_of_income
-    #     return {"current_year": current_year,
-    #             "total_income_result": total_income_result}
-    #
-    # @staticmethod
-    # def expenses_difference(request):
-    #     """Calculate income difference"""
-    #     current_year = datetime.now().year
-    #     previous_year = datetime.today().year - 1
-    #     current_year_income = 0
-    #     previous_year_income = 0
-    #     result = request.user.income_set.all()
-    #     for i in result.filter(date_of_income__year=current_year):
-    #         current_year_income += i.amount_of_income
-    #     for i in result.filter(date_of_income__year=previous_year):
-    #         previous_year_income += i.amount_of_income
-    #     total_income_difference = abs(current_year_income - previous_year_income)
-    #     return {"current_year": current_year,
-    #             "current_year_income": current_year_income,
-    #             "previous_year": previous_year,
-    #             "previous_year_income": previous_year_income,
-    #             "difference": total_income_difference}
-    #
-    # @staticmethod
-    # def previous_month_expenses(request):
-    #     """Sum income for previous month of current year"""
-    #     current_year = datetime.now().year
-    #     previous_month = datetime.now().month - 1
-    #     total_income_result = 0
-    #     result = request.user.income_set.all()
-    #     for i in result.filter(date_of_income__year=current_year, date_of_income__month=previous_month):
-    #         total_income_result += i.amount_of_income
-    #     return f'Your income in {previous_month} {datetime.now().strftime("%Y")} year: ' \
-    #            f'{total_income_result:.2f}.'
-    #
-    # @staticmethod
-    # def current_month_expenses(request):
-    #     """Sum income for current month of current year"""
-    #     current_date = datetime.now()
-    #     total_income_result = 0
-    #     result = request.user.income_set.all()
-    #     for i in result.filter(date_of_income__year=current_date.year, date_of_income__month=current_date.month):
-    #         total_income_result += i.amount_of_income
-    #         return {"current_year": current_date.strftime("%Y"),
-    #                 "current_month": current_date.strftime("%B"),
-    #                 "total_income_result": total_income_result}
+    @staticmethod
+    def current_year_expenses(request):
+        """Sum income for current year"""
+        current_year = datetime.now().year
+        total_expenses_result = 0
+        result = request.user.purchasedgoods_set.all()
+        for i in result.filter(date_of_purchase__year=current_year):
+            total_expenses_result += i.price_per_item * i.quantity_of_goods
+        return {"current_year": current_year,
+                "total_expenses_result": total_expenses_result}
+
+    @staticmethod
+    def expenses_difference(request):
+        """Calculate income difference"""
+        current_year = datetime.now().year
+        previous_year = datetime.today().year - 1
+        current_year_expenses = 0
+        previous_year_expenses = 0
+        result = request.user.purchasedgoods_set.all()
+        for i in result.filter(date_of_purchase__year=current_year):
+            current_year_expenses += i.price_per_item * i.quantity_of_goods
+        for i in result.filter(date_of_purchase__year=previous_year):
+            previous_year_expenses += i.price_per_item * i.quantity_of_goods
+        total_expenses_difference = abs(current_year_expenses - previous_year_expenses)
+        return {"current_year": current_year,
+                "current_year_expenses": current_year_expenses,
+                "previous_year": previous_year,
+                "previous_year_expenses": previous_year_expenses,
+                "difference": total_expenses_difference}
+
+    @staticmethod
+    def previous_month_expenses(request):
+        """Sum income for previous month of current year"""
+        current_year = datetime.now().year
+        previous_month = datetime.now().month - 1
+        total_expenses_result = 0
+        result = request.user.purchasedgoods_set.all()
+        for i in result.filter(date_of_purchase__year=current_year, date_of_purchase__month=previous_month):
+            total_expenses_result += i.price_per_item * i.quantity_of_goods
+        return f'Your income in {previous_month} {datetime.now().strftime("%Y")} year: ' \
+               f'{total_expenses_result:.2f}.'
+
+    @staticmethod
+    def current_month_expenses(request):
+        """Sum income for current month of current year"""
+        current_date = datetime.now()
+        total_expenses_result = 0
+        result = request.user.purchasedgoods_set.all()
+        for i in result.filter(date_of_purchase__year=current_date.year, date_of_purchase__month=current_date.month):
+            total_expenses_result += i.price_per_item * i.quantity_of_goods
+            return {"current_year": current_date.strftime("%Y"),
+                    "current_month": current_date.strftime("%B"),
+                    "total_expenses_result": total_expenses_result}
 
     def __str__(self):
         return self.name_of_product

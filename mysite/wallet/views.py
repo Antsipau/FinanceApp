@@ -214,6 +214,10 @@ def my_purchased_goods(request):
         'my_goods': my_goods,
         'title': 'Purchased goods',
         'user_expenses': PurchasedGoods.user_expenses(request),
+        'previous_year_expenses': PurchasedGoods.previous_year_expenses(request),
+        'current_month_expenses': PurchasedGoods.current_month_expenses(request),
+        'current_year_expenses': PurchasedGoods.current_year_expenses(request),
+        'expenses_difference': PurchasedGoods.expenses_difference(request)
     }
 
     return render(request, 'wallet/purchased_goods_page.html', context=context)
